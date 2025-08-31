@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>דוח ניהול סיכונים - אגף חברה ונוער 3.0</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+line-height: 1.6;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: #2c3e50;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+background: rgba(255, 255, 255, 0.98);
+border-radius: 20px;
+box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+overflow: hidden;
+}
+
+.header {
+background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+color: white;
+padding: 50px 40px;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+
+.header::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+opacity: 0.3;
+}
+
+.header h1 {
+font-size: 3em;
+margin-bottom: 15px;
+position: relative;
+z-index: 1;
+text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.header .subtitle {
+font-size: 1.4em;
+opacity: 0.9;
+position: relative;
+z-index: 1;
+margin-bottom: 10px;
+}
+
+.date-badge {
+display: inline-block;
+background: rgba(255,255,255,0.2);
+padding: 8px 16px;
+border-radius: 20px;
+font-size: 0.9em;
+margin-top: 15px;
+backdrop-filter: blur(10px);
+position: relative;
+z-index: 1;
+}
+
+.edit-toggle {
+position: fixed;
+top: 20px;
+left: 20px;
+background: #3498db;
+color: white;
+border: none;
+padding: 15px 25px;
+border-radius: 25px;
+cursor: pointer;
+font-size: 1em;
+font-weight: bold;
+box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+z-index: 1000;
+transition: all 0.3s ease;
+}
+
+.edit-toggle:hover {
+background: #2980b9;
+transform: translateY(-2px);
+}
+
+.edit-toggle.active {
+background: #27ae60;
+}
+
+.pdf-export {
+position: fixed;
+top: 80px;
+left: 20px;
+background: #e74c3c;
+color: white;
+border: none;
+padding: 15px 25px;
+border-radius: 25px;
+cursor: pointer;
+font-size: 1em;
+font-weight: bold;
+box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+z-index: 1000;
+transition: all 0.3s ease;
+}
+
+.html-export {
+position: fixed;
+top: 140px;
+left: 20px;
+background: #9b59b6;
+color: white;
+border: none;
+padding: 15px 25px;
+border-radius: 25px;
+cursor: pointer;
+font-size: 1em;
+font-weight: bold;
+box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+z-index: 1000;
+transition: all 0.3s ease;
+}
+
+.html-export:hover {
+background: #8e44ad;
+transform: translateY(-2px);
+}
+
+.pdf-export:hover {
+background: #c0392b;
+transform: translateY(-2px);
+}
+
+.pdf-export.exporting {
+background: #f39c12;
+cursor: not-allowed;
+}
+
+.editable {
+padding: 3px;
+border-radius: 3px;
+transition: all 0.3s ease;
+}
+
+.editable[contenteditable="true"] {
+background: rgba(52, 152, 219, 0.1);
+border: 2px dashed #3498db;
+outline: none;
+cursor: text;
+padding: 5px;
+}
+
+.editable[contenteditable="true"]:hover {
+background: rgba(52, 152, 219, 0.2);
+}
+
+.editable[contenteditable="true"]:focus {
+background: rgba(52, 152, 219, 0.15);
+box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+.success-message {
+position: fixed;
+top: 100px;
+right: 20px;
+background: #27ae60;
+color: white;
+padding: 15px 25px;
+border-radius: 10px;
+font-weight: bold;
+opacity: 0;
+transform: translateX(400px);
+transition: all 0.3s ease;
+z-index: 1001;
+}
+
+.success-message.show {
+opacity: 1;
+transform: translateX(0);
+}
+
+.nav-menu {
+position: sticky;
+top: 0;
+background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+z-index: 1000;
+box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.nav-links {
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 0;
+list-style: none;
+margin: 0;
+}
+
+.nav-links li {
+flex: 1;
+}
+
+.nav-links a {
+display: block;
+padding: 18px 20px;
+color: #bdc3c7;
+text-decoration: none;
+text-align: center;
+font-weight: 600;
+font-size: 0.95em;
+transition: all 0.3s ease;
+border-left: 1px solid #2c3e50;
+position: relative;
+}
+
+.nav-links li:first-child a {
+border-left: none;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+background: #2c3e50;
+color: white;
+transform: translateY(-2px);
+}
+
+.nav-links a::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 50%;
+width: 0;
+height: 3px;
+background: #3498db;
+transition: all 0.3s ease;
+transform: translateX(-50%);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+width: 80%;
+}
+
+.section {
+scroll-margin-top: 80px;
+}
+
+.section-header {
+background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+color: white;
+padding: 25px 40px;
+font-size: 2.2em;
+font-weight: bold;
+text-align: center;
+margin: 0;
+position: relative;
+}
+
+.section-header::after {
+content: '';
+position: absolute;
+bottom: -15px;
+left: 50%;
+transform: translateX(-50%);
+width: 80px;
+height: 5px;
+background: rgba(255, 255, 255, 0.8);
+border-radius: 3px;
+}
+
+.project-overview {
+padding: 40px;
+background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.overview-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 25px;
+margin-top: 30px;
+}
+
+.overview-card {
+background: white;
+padding: 25px;
+border-radius: 15px;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+border-top: 4px solid #3498db;
+transition: all 0.3s ease;
+}
+
+.overview-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.overview-card h4 {
+color: #2c3e50;
+margin-bottom: 12px;
+font-size: 1.2em;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.overview-card .icon {
+font-size: 1.5em;
+}
+
+.goals-section {
+background: white;
+margin: 30px 40px;
+padding: 30px;
+border-radius: 15px;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.goals-section h3 {
+color: #2c3e50;
+margin-bottom: 20px;
+font-size: 1.5em;
+text-align: center;
+}
+
+.goal-item, .deliverable-item {
+background: #f8f9fa;
+margin: 15px 0;
+padding: 20px;
+border-radius: 10px;
+border-right: 4px solid #27ae60;
+transition: all 0.3s ease;
+}
+
+.goal-item:hover, .deliverable-item:hover {
+background: #e9ecef;
+transform: translateX(-5px);
+}
+
+.risks-container {
+padding: 40px;
+background: white;
+}
+
+.risk-summary {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+margin-bottom: 40px;
+}
+
+.summary-card {
+background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+padding: 25px;
+border-radius: 15px;
+text-align: center;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease;
+}
+
+.summary-card:hover {
+transform: translateY(-3px);
+}
+
+.summary-number {
+font-size: 3em;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.very-high { color: #e74c3c; }
+.high { color: #f39c12; }
+.medium { color: #f1c40f; }
+.low { color: #27ae60; }
+
+.risks-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+gap: 25px;
+margin-top: 30px;
+}
+
+.risk-card {
+background: white;
+border-radius: 15px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+padding: 30px;
+transition: all 0.3s ease;
+border-top: 6px solid;
+position: relative;
+overflow: hidden;
+}
+
+.risk-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 6px;
+background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+0% { transform: translateX(-100%); }
+100% { transform: translateX(100%); }
+}
+
+.risk-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.risk-very-high { border-top-color: #e74c3c; }
+.risk-high { border-top-color: #f39c12; }
+.risk-medium { border-top-color: #f1c40f; }
+.risk-low { border-top-color: #27ae60; }
+
+.risk-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 20px;
+gap: 15px;
+}
+
+.risk-title {
+font-size: 1.3em;
+font-weight: bold;
+color: #2c3e50;
+flex: 1;
+}
+
+.risk-severity {
+padding: 8px 15px;
+border-radius: 25px;
+font-size: 0.8em;
+font-weight: bold;
+color: white;
+white-space: nowrap;
+}
+
+.severity-very-high { background: #e74c3c; }
+.severity-high { background: #f39c12; }
+.severity-medium { background: #f1c40f; color: #2c3e50; }
+.severity-low { background: #27ae60; }
+
+.risk-metrics {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 15px;
+margin: 20px 0;
+text-align: center;
+}
+
+.metric {
+background: #f8f9fa;
+padding: 15px;
+border-radius: 10px;
+}
+
+.metric-value {
+font-size: 1.8em;
+font-weight: bold;
+color: #2c3e50;
+}
+
+.metric-label {
+font-size: 0.9em;
+color: #7f8c8d;
+margin-top: 5px;
+}
+
+.risk-description, .risk-opportunity {
+color: #34495e;
+line-height: 1.7;
+background: #f8f9fa;
+padding: 20px;
+border-radius: 10px;
+margin-top: 15px;
+border-right: 4px solid #bdc3c7;
+}
+
+.risk-opportunity {
+border-right-color: #27ae60;
+margin-top: 10px;
+}
+
+.risk-impact {
+margin-top: 20px;
+}
+
+.impact-title {
+font-weight: bold;
+color: #e74c3c;
+margin-bottom: 10px;
+}
+
+.impact-list {
+list-style: none;
+padding-right: 15px;
+}
+
+.impact-list li {
+padding: 8px 0;
+border-bottom: 1px solid #ecf0f1;
+position: relative;
+}
+
+.impact-list li::before {
+content: '⚠️';
+margin-left: 10px;
+}
+
+.opportunity-title {
+font-weight: bold;
+color: #27ae60;
+margin-top: 20px;
+margin-bottom: 10px;
+}
+
+.opportunity-list {
+list-style: none;
+padding-right: 15px;
+}
+
+.opportunity-list li {
+padding: 8px 0;
+border-bottom: 1px solid #ecf0f1;
+position: relative;
+}
+
+.opportunity-list li::before {
+content: '✅';
+margin-left: 10px;
+}
+
+.strategies-section {
+padding: 50px 40px;
+background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+}
+
+.strategy-card {
+background: white;
+margin: 30px 0;
+border-radius: 20px;
+box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+overflow: hidden;
+transition: all 0.3s ease;
+}
+
+.strategy-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.strategy-header {
+background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+color: white;
+padding: 25px 30px;
+font-weight: bold;
+font-size: 1.3em;
+position: relative;
+}
+
+.strategy-header::after {
+content: '';
+position: absolute;
+bottom: -10px;
+left: 30px;
+width: 40px;
+height: 4px;
+background: rgba(255, 255, 255, 0.8);
+border-radius: 2px;
+}
+
+.strategy-content {
+padding: 30px;
+}
+
+.strategy-detail {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+margin-top: 20px;
+}
+
+.detail-item {
+background: #f8f9fa;
+padding: 20px;
+border-radius: 12px;
+border-right: 4px solid #27ae60;
+transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+background: #e9ecef;
+transform: translateX(-3px);
+}
+
+.detail-item h5 {
+color: #27ae60;
+margin-bottom: 8px;
+font-size: 1.1em;
+}
+
+.timeline-badge {
+display: inline-block;
+background: #3498db;
+color: white;
+padding: 5px 12px;
+border-radius: 15px;
+font-size: 0.8em;
+margin-top: 10px;
+}
+
+.summary-box {
+background: white;
+padding: 30px;
+border-radius: 15px;
+margin: 30px 0;
+box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.committee-recommendations {
+background: #f0f8ff;
+padding: 25px;
+border-radius: 15px;
+margin-top: 30px;
+border-left: 6px solid #3498db;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.committee-recommendations h4 {
+color: #34495e;
+font-size: 1.4em;
+margin-bottom: 15px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.innovation-section {
+background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+color: white;
+padding: 50px 40px;
+text-align: center;
+position: relative;
+}
+
+.innovation-score {
+font-size: 5em;
+font-weight: bold;
+margin: 30px 0;
+text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+position: relative;
+}
+
+.innovation-components {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 25px;
+margin-top: 40px;
+}
+
+.component-card {
+background: rgba(255, 255, 255, 0.15);
+padding: 25px;
+border-radius: 15px;
+backdrop-filter: blur(15px);
+border: 1px solid rgba(255, 255, 255, 0.2);
+transition: all 0.3s ease;
+}
+
+.component-card:hover {
+background: rgba(255, 255, 255, 0.2);
+transform: translateY(-3px);
+}
+
+.component-score {
+font-size: 2.5em;
+font-weight: bold;
+color: #f39c12;
+margin-bottom: 10px;
+}
+
+.component-title {
+font-size: 1.1em;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.regulation-section {
+padding: 40px;
+background: #ecf0f1;
+}
+
+.regulation-table {
+width: 100%;
+background: white;
+border-radius: 15px;
+overflow: hidden;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+margin: 20px 0;
+}
+
+.regulation-table th,
+.regulation-table td {
+padding: 20px;
+text-align: right;
+border-bottom: 1px solid #ecf0f1;
+vertical-align: top;
+}
+
+.regulation-table th {
+background: #34495e;
+color: white;
+font-weight: bold;
+}
+
+.regulation-table tr:hover {
+background: #f8f9fa;
+}
+
+.footer {
+background: #2c3e50;
+color: white;
+text-align: center;
+padding: 30px;
+font-size: 0.9em;
+}
+
+.back-to-top {
+position: fixed;
+bottom: 30px;
+left: 30px;
+background: #3498db;
+color: white;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+transition: all 0.3s ease;
+z-index: 1000;
+opacity: 0;
+transform: translateY(20px);
+}
+
+.back-to-top.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+.back-to-top:hover {
+background: #2980b9;
+transform: translateY(-3px);
+box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+}
+
+@media (max-width: 768px) {
+.header h1 {
+font-size: 2.2em;
+}
+
+.nav-links {
+flex-direction: column;
+}
+
+.nav-links a {
+border-left: none;
+border-bottom: 1px solid #2c3e50;
+}
+
+.nav-links li:last-child a {
+border-bottom: none;
+}
+
+.risks-grid,
+.overview-grid,
+.innovation-components {
+grid-template-columns: 1fr;
+}
+
+.innovation-score {
+font-size: 3.5em;
+}
+
+.risk-header {
+flex-direction: column;
+align-items: flex-start;
+}
+
+.risk-metrics {
+grid-template-columns: 1fr;
+}
+
+.back-to-top {
+bottom: 20px;
+left: 20px;
+width: 45px;
+height: 45px;
+}
+
+.edit-toggle {
+top: 10px;
+left: 10px;
+padding: 12px 20px;
+font-size: 0.9em;
+}
+.pdf-export {
+top: 65px;
+left: 10px;
+padding: 12px 20px;
+font-size: 0.9em;
+}
+.html-export {
+top: 120px;
+left: 10px;
+padding: 12px 20px;
+font-size: 0.9em;
+}
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+/* CSS משופר להדפסה - צמצום רווחים */
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+    
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+        font-size: 9pt !important;
+        line-height: 1.2 !important;
+    }
+    
+    .container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+    
+    .edit-toggle, .pdf-export, .html-export, .back-to-top, .nav-menu {
+        display: none !important;
+    }
+    
+    /* כותרת ראשית */
+    .header {
+        padding: 10px 10px !important;
+        margin: 0 !important;
+        page-break-after: avoid !important;
+    }
+    
+    .header h1 {
+        font-size: 20pt !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .header .subtitle {
+        font-size: 10pt !important;
+        margin-bottom: 3px !important;
+    }
+    
+    .date-badge {
+        padding: 3px 8px !important;
+        margin-top: 5px !important;
+        font-size: 8pt !important;
+    }
+    
+    /* כותרות סקציות */
+    .section-header {
+        padding: 8px 10px !important;
+        font-size: 12pt !important;
+        margin: 0 !important;
+        page-break-after: avoid !important;
+    }
+    
+    .section-header::after {
+        display: none !important;
+    }
+    
+    /* סקציות */
+    .section {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .project-overview {
+        padding: 8px 10px !important;
+    }
+    
+    /* כרטיסי סקירה */
+    .overview-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 5px !important;
+        margin-top: 8px !important;
+    }
+    
+    .overview-card {
+        padding: 6px 8px !important;
+        border-radius: 5px !important;
+        page-break-inside: avoid !important;
+    }
+    
+    .overview-card h4 {
+        font-size: 9pt !important;
+        margin-bottom: 3px !important;
+    }
+    
+    .overview-card p {
+        font-size: 8pt !important;
+        margin: 0 !important;
+    }
+    
+    /* מטרות ותוצרים */
+    .goals-section {
+        margin: 5px 10px !important;
+        padding: 8px !important;
+        page-break-inside: avoid !important;
+    }
+    
+    .goals-section h3 {
+        font-size: 11pt !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .goal-item, .deliverable-item {
+        margin: 5px 0 !important;
+        padding: 5px 8px !important;
+        font-size: 8pt !important;
+        border-radius: 3px !important;
+    }
+    
+    /* מיכל סיכונים */
+    .risks-container {
+        padding: 8px 10px !important;
+    }
+    
+    /* סיכום סיכונים */
+    .risk-summary {
+        gap: 8px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .summary-card {
+        padding: 8px !important;
+        border-radius: 5px !important;
+    }
+    
+    .summary-number {
+        font-size: 16pt !important;
+        margin-bottom: 3px !important;
+    }
+    
+    .summary-card div:last-child {
+        font-size: 7pt !important;
+    }
+    
+    /* כרטיסי סיכון */
+    .risks-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+        margin-top: 10px !important;
+    }
+    
+    .risk-card {
+        padding: 10px !important;
+        margin: 0 0 8px 0 !important;
+        page-break-inside: avoid !important;
+        border-radius: 5px !important;
+        border-top-width: 4px !important;
+    }
+    
+    .risk-card::before {
+        display: none !important;
+    }
+    
+    .risk-header {
+        margin-bottom: 8px !important;
+        gap: 8px !important;
+    }
+    
+    .risk-title {
+        font-size: 10pt !important;
+    }
+    
+    .risk-severity {
+        padding: 3px 8px !important;
+        font-size: 7pt !important;
+        border-radius: 12px !important;
+    }
+    
+    /* מטריקות סיכון */
+    .risk-metrics {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 5px !important;
+        margin: 8px 0 !important;
+    }
+    
+    .metric {
+        padding: 5px !important;
+        border-radius: 3px !important;
+    }
+    
+    .metric-value {
+        font-size: 12pt !important;
+    }
+    
+    .metric-label {
+        font-size: 7pt !important;
+        margin-top: 2px !important;
+    }
+    
+    /* תיאורי סיכון */
+    .risk-description, .risk-opportunity {
+        font-size: 8pt !important;
+        padding: 5px 8px !important;
+        margin-top: 5px !important;
+        border-radius: 3px !important;
+        line-height: 1.3 !important;
+    }
+    
+    /* רשימות השפעה והזדמנויות */
+    .impact-title, .opportunity-title {
+        font-size: 9pt !important;
+        margin-top: 8px !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .impact-list, .opportunity-list {
+        padding-right: 10px !important;
+    }
+    
+    .impact-list li, .opportunity-list li {
+        font-size: 8pt !important;
+        padding: 3px 0 !important;
+    }
+    
+    /* אסטרטגיות */
+    .strategies-section {
+        padding: 10px !important;
+    }
+    
+    .strategy-card {
+        margin: 8px 0 !important;
+        page-break-inside: avoid !important;
+        border-radius: 5px !important;
+    }
+    
+    .strategy-header {
+        padding: 8px 10px !important;
+        font-size: 10pt !important;
+    }
+    
+    .strategy-header::after {
+        display: none !important;
+    }
+    
+    .strategy-content {
+        padding: 8px 10px !important;
+    }
+    
+    .strategy-detail {
+        gap: 5px !important;
+        margin-top: 8px !important;
+    }
+    
+    .detail-item {
+        padding: 5px 8px !important;
+        border-radius: 3px !important;
+    }
+    
+    .detail-item h5 {
+        font-size: 9pt !important;
+        margin-bottom: 3px !important;
+    }
+    
+    .detail-item p {
+        font-size: 8pt !important;
+        margin: 0 !important;
+    }
+    
+    .timeline-badge {
+        padding: 2px 6px !important;
+        font-size: 7pt !important;
+        margin-top: 3px !important;
+    }
+    
+    /* סיכומים */
+    .summary-box {
+        padding: 10px !important;
+        margin: 8px 0 !important;
+        border-radius: 5px !important;
+        page-break-inside: avoid !important;
+    }
+    
+    .summary-box h3 {
+        font-size: 11pt !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .summary-box p {
+        font-size: 8pt !important;
+        line-height: 1.3 !important;
+    }
+    
+    /* המלצות ועדה */
+    .committee-recommendations {
+        padding: 8px !important;
+        margin-top: 8px !important;
+        border-left-width: 4px !important;
+        border-radius: 3px !important;
+    }
+    
+    .committee-recommendations h4 {
+        font-size: 10pt !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .committee-recommendations p {
+        font-size: 8pt !important;
+    }
+    
+    /* חדשנות */
+    .innovation-section {
+        padding: 10px !important;
+        page-break-inside: avoid !important;
+    }
+    
+    .innovation-score {
+        font-size: 24pt !important;
+        margin: 10px 0 !important;
+    }
+    
+    .innovation-components {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 5px !important;
+        margin-top: 10px !important;
+    }
+    
+    .component-card {
+        padding: 8px !important;
+        border-radius: 5px !important;
+    }
+    
+    .component-score {
+        font-size: 14pt !important;
+        margin-bottom: 3px !important;
+    }
+    
+    .component-title {
+        font-size: 9pt !important;
+        margin-bottom: 3px !important;
+    }
+    
+    .component-card p {
+        font-size: 8pt !important;
+        margin: 0 !important;
+    }
+    
+    /* טבלת רגולציה */
+    .regulation-section {
+        padding: 8px 10px !important;
+    }
+    
+    .regulation-section > p {
+        font-size: 9pt !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .regulation-table {
+        font-size: 8pt !important;
+        margin: 8px 0 !important;
+        border-radius: 5px !important;
+    }
+    
+    .regulation-table th, .regulation-table td {
+        padding: 5px 8px !important;
+        border-bottom-width: 1px !important;
+    }
+    
+    .regulation-table th {
+        font-size: 9pt !important;
+    }
+    
+    /* כותרת תחתונה */
+    .footer {
+        padding: 10px !important;
+        font-size: 8pt !important;
+        margin-top: 10px !important;
+    }
+    
+    .footer div {
+        margin-top: 8px !important;
+        padding-top: 8px !important;
+        font-size: 7pt !important;
+    }
+    
+    /* כללי */
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 0 !important;
+        margin-bottom: 5px !important;
+        page-break-after: avoid !important;
+    }
+    
+    p {
+        margin: 0 0 5px 0 !important;
+    }
+    
+    ul, ol {
+        margin: 0 !important;
+        padding-right: 15px !important;
+    }
+    
+    li {
+        margin: 0 !important;
+        padding: 2px 0 !important;
+    }
+    
+    /* הגדרות עמוד */
+    @page {
+        margin: 10mm;
+        size: A4;
+    }
+    
+    /* מונע שבירת דפים באמצע אלמנטים */
+    .risk-card, .strategy-card, .overview-card, .summary-box, 
+    .goals-section, .committee-recommendations, .component-card {
+        page-break-inside: avoid !important;
+    }
+    
+    /* רווח בין סקציות */
+    .section + .section {
+        margin-top: 10px !important;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<button class="edit-toggle" id="editToggle">🎨 התחל עריכה</button>
+<button class="pdf-export" id="pdfExport">📄 ייצוא ל-PDF</button>
+<button class="html-export" id="htmlExport">💾 שמור כ-HTML</button>
+
+<div class="success-message" id="successMessage">✅ מצב עריכה הופעל!</div>
+
+<header class="header">
+<h1 class="editable">דוח ניהול סיכונים מקיף</h1>
+<div class="subtitle editable">אגף חברה ונוער 3.0 - טרנספורמציה דיגיטלית ופדגוגית</div>
+<div class="date-badge editable">מינהל חברה ונוער, משרד החינוך • 2025</div>
+</header>
+
+<nav class="nav-menu">
+<ul class="nav-links">
+<li><a href="#project" class="nav-link">📋 הגדרת הפרויקט</a></li>
+<li><a href="#risks" class="nav-link">⚠️ ניהול סיכונים</a></li>
+<li><a href="#strategies" class="nav-link">📈 תוכנית התמודדות</a></li>
+<li><a href="#innovation" class="nav-link">🚀 אסדרת חדשנות</a></li>
+<li><a href="#innovation-level" class="nav-link">📊 רמת החדשנות</a></li>
+<li><a href="#regulation-compliance" class="nav-link">✅ התאמה לדרישות אסדרה</a></li>
+<li><a href="#executive-summary-section" class="nav-link">📝 סיכום מנהלים והמלצות</a></li>
+</ul>
+</nav>
+
+<section id="project" class="section">
+<div class="section-header editable">📋 הגדרת הפרויקט</div>
+
+<div class="project-overview">
+<h2 style="text-align: center; color: #2c3e50; font-size: 2.2em; margin-bottom: 30px;" class="editable">פרטי הפרויקט</h2>
+<div class="overview-grid">
+<div class="overview-card">
+<h4><span class="icon">👤</span><span class="editable">מנהל הפרויקט</span></h4>
+<p class="editable">הנהלת אגף חברה ונוער</p>
+</div>
+<div class="overview-card">
+<h4><span class="icon">🏢</span><span class="editable">ארגון</span></h4>
+<p class="editable">מינהל חברה ונוער, משרד החינוך</p>
+</div>
+<div class="overview-card">
+<h4><span class="icon">🌍</span><span class="editable">היקף הפרויקט</span></h4>
+<p class="editable">כלל-ארצי, כלל עובדי ומדריכי האגף, בני נוער</p>
+</div>
+<div class="overview-card">
+<h4><span class="icon">📅</span><span class="editable">לוח זמנים</span></h4>
+<p class="editable">פיילוט 2025, פריסה רב-שנתית 2026-2028</p>
+</div>
+<div class="overview-card">
+<h4><span class="icon">🚀</span><span class="editable">סוג הפרויקט</span></h4>
+<p class="editable">טרנספורמציה ארגונית ופדגוגית</p>
+</div>
+<div class="overview-card">
+<h4><span class="icon">🤝</span><span class="editable">שותפים רגולטורים</span></h4>
+<p class="editable">מינהל הפדגוגי, מינהל תקשוב, טכנולוגיה ומערכות מידע</p>
+</div>
+</div>
+</div>
+
+<div class="goals-section">
+<h3 class="editable">🎯 מטרות הפרויקט (עד 3 מטרות מרכזיות)</h3>
+<div class="goal-item editable"><strong>1. קידום חינוך חברתי-ערכי רלוונטי ומותאם אישית:</strong> מעבר מחינוך אחיד למודל המאפשר התאמה אישית של תכנים ופעילויות לצרכים ולתחומי העניין של בני הנוער, תוך שמירה על ליבה ערכית משותפת.</div>
+<div class="goal-item editable"><strong>2. פיתוח מבנה ארגוני גמיש, חדשני ותומך שטח:</strong> שינוי המבנה ההיררכי למודל מבוסס צוותי משימה ("סקוואדים") במטרה להגביר את הגמישות, היצירתיות ומתן מענה מהיר ואיכותי לאנשי החינוך בשטח.</div>
+<div class="goal-item editable"><strong>3. יצירת מערכת למידה והתפתחות דינמית מבוססת נתונים:</strong> בניית מערכת דיגיטלית שתאפשר לעובדי ההוראה למידה מתמדת, שיתוף ידע וקבלת החלטות פדגוגיות המבוססות על נתונים ומשוב מהשטח.</div>
+</div>
+
+<div class="goals-section">
+<h3 class="editable">📋 תוצרים מצופים</h3>
+<div class="deliverable-item editable">פלטפורמה דיגיטלית מרכזית ("Hub") לניהול ידע, תכנים והתפתחות מקצועית.</div>
+<div class="deliverable-item editable">מודל עבודה ארגוני חדש מבוסס "סקוואדים" ו-"צ'פטרים" המוּטמע באגף.</div>
+<div class="deliverable-item editable">מאגר תכנים דיגיטלי, דינמי ומתעדכן של פעילויות חינוכיות מותאמות אישית.</div>
+<div class="deliverable-item editable">מערך הכשרה והטמעה לעובדי האגף למעבר למודל העבודה החדש.</div>
+</div>
+</section>
+
+<section id="risks" class="section">
+<div class="section-header editable">⚠️ ניהול סיכונים</div>
+
+<div class="risks-container">
+<div class="risk-summary">
+<div class="summary-card">
+<div class="summary-number very-high editable">0</div>
+<div class="editable">סיכונים בחומרה<br>גבוהה מאוד</div>
+</div>
+<div class="summary-card">
+<div class="summary-number high editable">3</div>
+<div class="editable">סיכונים בחומרה<br>גבוהה</div>
+</div>
+<div class="summary-card">
+<div class="summary-number medium editable">1</div>
+<div class="editable">סיכונים בחומרה<br>בינונית</div>
+</div>
+<div class="summary-card">
+<div class="summary-number low editable">0</div>
+<div class="editable">סיכונים בחומרה<br>נמוכה</div>
+</div>
+</div>
+
+<div class="risks-grid">
+<div class="risk-card risk-high">
+<div class="risk-header">
+<div class="risk-title editable">סיכון לשטחיות פדגוגית (נגזר ממטרה 1: קידום חינוך רלוונטי)</div>
+<div class="risk-severity severity-high">חומרה גבוהה</div>
+</div>
+<div class="risk-metrics">
+<div class="metric"><div class="metric-value editable">7</div><div class="metric-label">הסתברות (1-10)</div></div>
+<div class="metric"><div class="metric-value editable">8</div><div class="metric-label">נזק (1-10)</div></div>
+<div class="metric"><div class="metric-value editable">56</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
+</div>
+<div class="risk-description editable">ההתמקדות ב"טרנדים" ובייצור מהיר של תכנים דיגיטליים עלולה להוביל לפעילויות שטחיות שאינן מקדמות תהליכי עומק חינוכיים וערכיים, ובכך תחטיא את המהות של החינוך החברתי.</div>
+<div class="risk-impact">
+<h5 class="impact-title editable">השלכות פוטנציאליות</h5>
+<ul class="impact-list">
+<li class="editable">ירידה באיכות התהליכים החינוכיים ובהשפעתם על בני הנוער.</li>
+<li class="editable">שחיקת האמון של השטח באגף כמקור מקצועי פדגוגי מוביל.</li>
+<li class="editable">התמקדות במדדי מעורבות (Engagement) שטחיים על חשבון צמיחה ושינוי עמדות.</li>
+</ul>
+</div>
+<div class="risk-opportunity">
+<h5 class="opportunity-title editable">הזדמנויות לשיפור</h5>
+<ul class="opportunity-list">
+<li class="editable">פיתוח מנגנון "תו תקן פדגוגי" המבטיח עומק ערכי בכל תוכן חדש.</li>
+<li class="editable">הזדמנות להגדיר מחדש מהי "רלוונטיות" בחינוך ערכי, מעבר לטרנדים חולפים.</li>
+</ul>
+</div>
+</div>
+
+<div class="risk-card risk-high">
+<div class="risk-header">
+<div class="risk-title editable">שחיקה והתנגדות של אנשי חינוך (נגזר ממטרה 2: פיתוח מבנה ארגוני גמיש)</div>
+<div class="risk-severity severity-high">חומרה גבוהה</div>
+</div>
+<div class="risk-metrics">
+<div class="metric"><div class="metric-value editable">8</div><div class="metric-label">הסתברות (1-10)</div></div>
+<div class="metric"><div class="metric-value editable">7</div><div class="metric-label">נזק (1-10)</div></div>
+<div class="metric"><div class="metric-value editable">56</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
+</div>
+<div class="risk-description editable">הדרישה לגמישות מתמדת, למידת טכנולוגיות חדשות ושינוי תפיסתי עמוק, ללא תמיכה, הכשרה ומשאבים מספקים, עלולה להוביל לשחיקה, עומס יתר והתנגדות מצד עובדי הוראה ומדריכים בשטח.</div>
+<div class="risk-impact">
+<h5 class="impact-title editable">השלכות פוטנציאליות</h5>
+<ul class="impact-list">
+<li class="editable">כישלון בהטמעת המודל החדש ושימור דפוסי עבודה ישנים "מתחת לרדאר".</li>
+<li class="editable">ירידה במוטיבציה ובאיכות העבודה של אנשי החינוך המובילים את הפעילות.</li>
+<li class="editable">בזבוז משאבים על פיתוח כלים ומודלים שלא יאומצו בפועל.</li>
+</ul>
+</div>
+<div class="risk-opportunity">
+<h5 class="opportunity-title editable">הזדמנויות לשיפור</h5>
+<ul class="opportunity-list">
+<li class="editable">בניית מודל התפתחות מקצועית חדשני, המעצים את אנשי השטח והופך אותם לשותפים בתהליך השינוי.</li>
+<li class="editable">יצירת קהילות למידה מקצועיות שיספקו תמיכה הדדית ויאיצו את תהליך ההטמעה.</li>
+</ul>
+</div>
+</div>
+
+<div class="risk-card risk-high">
+<div class="risk-header">
+<div class="risk-title editable">העמקת פערים פדגוגיים ודיגיטליים (נגזר ממטרה 1 ו-3)</div>
+<div class="risk-severity severity-high">חומרה גבוהה</div>
+</div>
+<div class="risk-metrics">
+<div class="metric"><div class="metric-value editable">6</div><div class="metric-label">הסתברות (1-10)</div></div>
+<div class="metric"><div class="metric-value editable">9</div><div class="metric-label">נזק (1-10)</div></div>
+<div class="metric"><div class="metric-value editable">54</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
+</div>
+<div class="risk-description editable">המעבר למסלולים מותאמים אישית ולפלטפורמות דיגיטליות עלול להיטיב בעיקר עם תלמידים ועובדי הוראה בעלי אוריינות דיגיטלית גבוהה ומשאבים, ובכך להרחיב פערים קיימים מול אוכלוסיות בפריפריה החברתית והגיאוגרפית.</div>
+<div class="risk-impact">
+<h5 class="impact-title editable">השלכות פוטנציאליות</h5>
+<ul class="impact-list">
+<li class="editable">פגיעה בעקרון שוויון ההזדמנויות בחינוך הבלתי פורמלי.</li>
+<li class="editable">יצירת "מעמדות" של בני נוער ומדריכים - אלו המחוברים לפלטפורמה ואלו שלא.</li>
+<li class="editable">נתונים מוטים שאינם משקפים את המצב האמיתי של כלל האוכלוסייה.</li>
+</ul>
+</div>
+<div class="risk-opportunity">
+<h5 class="opportunity-title editable">הזדמנויות לשיפור</h5>
+<ul class="opportunity-list">
+<li class="editable">הזדמנות להשתמש בטכנולוגיה דווקא ככלי לצמצום פערים, באמצעות הנגשת תכנים איכותיים לאזורים מרוחקים.</li>
+<li class="editable">פיתוח מודלים פדגוגיים ייעודיים לתמיכה באוכלוסיות מתקשות.</li>
+</ul>
+</div>
+</div>
+
+<div class="risk-card risk-medium">
+<div class="risk-header">
+<div class="risk-title editable">אובדן חזון פדגוגי אחיד (נגזר ממטרה 2: פיתוח מבנה ארגוני גמיש)</div>
+<div class="risk-severity severity-medium">חומרה בינונית</div>
+</div>
+<div class="risk-metrics">
+<div class="metric"><div class="metric-value editable">6</div><div class="metric-label">הסתברות (1-10)</div></div>
+<div class="metric"><div class="metric-value editable">7</div><div class="metric-label">נזק (1-10)</div></div>
+<div class="metric"><div class="metric-value editable">42</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
+</div>
+<div class="risk-description editable">המעבר למודל מבוזר של צוותי משימה אוטונומיים ("סקוואדים") עלול להוביל לפיצול פדגוגי, חוסר בקו ערכי-חינוכי אחיד, וטשטוש הזהות והייחודיות של האגף כמכלול.</div>
+<div class="risk-impact">
+<h5 class="impact-title editable">השלכות פוטנציאליות</h5>
+<ul class="impact-list">
+<li class="editable">פיתוח "ממליכות" פדגוגיות נפרדות בתוך האגף.</li>
+<li class="editable">קושי בהערכת אימפקט כלל-ארגונית ובגיבוש מדיניות אחידה.</li>
+<li class="editable">בלבול בקרב השותפים והשטח לגבי החזון והמטרות של האגף.</li>
+</ul>
+</div>
+<div class="risk-opportunity">
+<h5 class="opportunity-title editable">הזדמנויות לשיפור</h5>
+<ul class="opportunity-list">
+<li class="editable">יצירת תפקיד "שומר סף פדגוגי" (Chapter Lead) שיהיה אחראי על קוהרנטיות וחיבור בין הצוותים השונים.</li>
+<li class="editable">פיתוח שפה וערכי ליבה משותפים שיהוו את "הדבק" המחבר בין כלל היוזמות.</li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="strategies" class="section">
+<div class="section-header editable">📈 תוכנית התמודדות עם סיכונים</div>
+<div class="strategies-section">
+<div class="strategy-card">
+<div class="strategy-header editable">אסטרטגיה 1: גיבוש "מעקות הגנה" פדגוגיים</div>
+<div class="strategy-content">
+<p class="editable">התמודדות עם הסיכון לשטחיות פדגוגית ואובדן חזון אחיד באמצעות הגדרת מסגרת פדגוגית ברורה. מסגרת זו תכלול עקרונות ליבה, מטרות-על ותוצאות למידה מצופות שכל יוזמה או תוכן חדש יהיו חייבים להתיישר לפיהם.</p>
+<div class="strategy-detail">
+<div class="detail-item">
+<h5 class="editable">פעולות מפתח</h5>
+<p class="editable">1. הקמת "ועדת היגוי פדגוגית" בין-תחומית.<br>2. ניסוח מסמך עקרונות פדגוגיים-ערכיים מחייב.<br>3. פיתוח "שאלון אימפקט פדגוגי" לכל יוזמה חדשה.</p>
+</div>
+<div class="detail-item">
+<h5 class="editable">אחריות וביצוע</h5>
+<p class="editable">היחידה לפיתוח פדגוגי, בשיתוף עם מובילי ה"צ'פטרים" המקצועיים.</p>
+<span class="timeline-badge editable">טווח זמן: 3 חודשים</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="strategy-card">
+<div class="strategy-header editable">אסטרטגיה 2: הטמעה הדרגתית מבוססת-תמיכה</div>
+<div class="strategy-content">
+<p class="editable">התמודדות עם סיכון השחיקה והתנגדות השטח באמצעות מודל הטמעה מדורג. המודל יתחיל בפיילוט מצומצם, ילווה במערך הכשרה ותמיכה אינטנסיבי, ויכלול מנגנוני משוב קבועים מהשטח להתאמת קצב השינוי ומתן מענה לקשיים.</p>
+<div class="strategy-detail">
+<div class="detail-item">
+<h5 class="editable">פעולות מפתח</h5>
+<p class="editable">1. בחירת "נבחרת חלוץ" להובלת הפיילוט.<br>2. בניית תוכנית הכשרה ייעודית הכוללת חניכה אישית.<br>3. הפעלת סקרי שביעות רצון ועומס תקופתיים בקרב אנשי השטח.</p>
+</div>
+<div class="detail-item">
+<h5 class="editable">אחריות וביצוע</h5>
+<p class="editable">צוות ייעודי לניהול השינוי וההטמעה, בשיתוף עם מחלקת ההדרכה.</p>
+<span class="timeline-badge editable">טווח זמן: מתמשך (שנה ראשונה לפיילוט)</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="strategy-card">
+<div class="strategy-header editable">אסטרטגיה 3: עיצוב מכוון שוויון וצמצום פערים</div>
+<div class="strategy-content">
+<p class="editable">התמודדות עם הסיכון להעמקת פערים באמצעות שילוב עקרונות של עיצוב מכליל (Inclusive Design) בכל שלבי הפיתוח. תתבצע אופטימיזציה של הכלים הדיגיטליים לסביבות טכנולוגיות מוגבלות ויינתן דגש על פיתוח תכנים הרגישים להקשרים תרבותיים וחברתיים מגוונים.</p>
+<div class="strategy-detail">
+<div class="detail-item">
+<h5 class="editable">פעולות מפתח</h5>
+<p class="editable">1. ביצוע "הערכת השפעה על שוויון הזדמנויות" לפני השקה.<br>2. הקצאת משאבי הדרכה ייעודיים לרשויות וצוותים בפריפריה.<br>3. ניטור פעיל של נתוני השימוש בפלטפורמה לזיהוי פערים בזמן אמת.</p>
+</div>
+<div class="detail-item">
+<h5 class="editable">אחריות וביצוע</h5>
+<p class="editable">צוות הפיתוח הטכנולוגי והפדגוגי, בשיתוף עם יועץ ייעודי לשוויון הזדמנויות.</p>
+<span class="timeline-badge editable">טווח זמן: לאורך כל חיי הפרויקט</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="innovation" class="section">
+<div class="section-header editable">🚀 אסדרת חדשנות</div>
+<div class="risks-container">
+<p class="editable" style="text-align: center; font-size: 1.1em; margin-bottom: 25px;">
+פרויקט "אגף חברה ונוער 3.0" מהווה יוזמה בעלת רמת חדשנות גבוהה, הדורשת התייחסות אסדרתית מותאמת בהתאם לעקרונות חוזר מנכ"ל לאסדרת חדשנות. החדשנות אינה רק טכנולוגית, אלא משלבת שינוי מבני-ארגוני עמוק עם תפיסה פדגוגית חדשה, ומצריכה "ארגז חול רגולטורי" שיאפשר התנסות ולמידה בסביבה מבוקרת.
+</p>
+<div class="summary-box">
+<h3 style="text-align: center; color: #2c3e50; font-size: 1.8em; margin-bottom: 20px;" class="editable">הגדרת רמת החדשנות</h3>
+<p class="editable">הפרויקט מוגדר כבעל <strong>חדשנות משבשת (Disruptive)</strong> במערכת החינוך הבלתי פורמלי. הוא אינו רק שיפור תהליכים קיימים, אלא שינוי יסודי של מודל הפעולה, המבנה הארגוני, תהליכי הפיתוח הפדגוגי ואופן האינטראקציה עם השטח. רמת אי-הוודאות גבוהה, וכך גם הפוטנציאל ליצירת ערך משמעותי עבור בני הנוער ואנשי החינוך.</p>
+<div class="committee-recommendations">
+<h4><span class="icon">👥</span><span class="editable">המלצת ועדת המשנה לאסדרת חדשנות:</span></h4>
+<p class="editable">לאור רמת החדשנות הגבוהה והסיכונים הנלווים, מומלץ לאשר את הפרויקט במסלול "ארגז חול רגולטורי" (Regulatory Sandbox). מסלול זה יאפשר לאגף לפעול תחת הקלות רגולטוריות מוגדרות מראש, לפרק זמן קצוב, ובליווי צמוד של גורמי האסדרה. זאת, במטרה לאפשר בדיקה של המודל החדש בסביבה אמיתית אך מבוקרת, תוך איסוף נתונים שיאפשרו קבלת החלטה מושכלת לגבי פריסה רחבה בעתיד.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="innovation-level" class="section innovation-section">
+<div class="section-header editable">📊 רמת החדשנות בפרויקט</div>
+<p class="editable" style="font-size: 1.2em; max-width: 800px; margin: 20px auto 40px; color: rgba(255,255,255,0.9);">
+הציון משקף את ממוצע ארבעת הרכיבים המרכזיים של חדשנות בפרויקט. הציון הגבוה מדגיש את השינוי העמוק שהפרויקט שואף לחולל, הן בתהליכי ההוראה והן במבנה הארגוני התומך.
+</p>
+<div class="innovation-score editable">7.8 / 10</div>
+<div class="innovation-components">
+<div class="component-card">
+<div class="component-score editable">9</div>
+<div class="component-title editable">השפעה פדגוגית</div>
+<p class="editable">מעבר ממודל אחיד למודל מותאם אישית, דינמי ומבוסס נתונים. שינוי תפיסתי עמוק.</p>
+</div>
+<div class="component-card">
+<div class="component-score editable">7</div>
+<div class="component-title editable">מורכבות טכנולוגית</div>
+<p class="editable">שילוב פלטפורמות תוכן, מערכות למידה (LMS), וכלים לניתוח נתונים. דורש אינטגרציה מורכבת.</p>
+</div>
+<div class="component-card">
+<div class="component-score editable">9</div>
+<div class="component-title editable">שינוי ארגוני</div>
+<p class="editable">שינוי מבני רדיקלי מהיררכיה לצוותים אג'יליים ("סקוואדים"). דורש שינוי תרבותי עמוק.</p>
+</div>
+<div class="component-card">
+<div class="component-score editable">6</div>
+<div class="component-title editable">סיכון טכנולוגי</div>
+<p class="editable">אי-ודאות בינונית לגבי יכולת האימוץ של הטכנולוגיות החדשות על ידי כלל המשתמשים בשטח.</p>
+</div>
+</div>
+</section>
+
+<section id="regulation-compliance" class="section">
+<div class="section-header editable">✅ התאמה לדרישות אסדרה</div>
+<div class="regulation-section">
+<p class="editable" style="font-size: 1.1em; text-align: center; margin-bottom: 30px;">
+הטבלה מציגה את התאמת הפרויקט לדרישות אסדרה מרכזיות במערכת החינוך, ומציעה הקלות רגולטוריות נדרשות במסגרת "ארגז החול הרגולטורי" שיאפשרו את הצלחת המיזם.
+</p>
+<div class="regulation-table">
+<table>
+<thead>
+<tr>
+<th class="editable">דרישת אסדרה</th>
+<th class="editable">תיאור</th>
+<th class="editable">סטטוס התאמה</th>
+<th class="editable">פעולות נדרשות / הפחתה רגולטורית מוצעת</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="editable"><strong>אישור תכניות חינוכיות</strong></td>
+<td class="editable">כל תכנית חינוכית דורשת אישור של גורמים פדגוגיים במטה.</td>
+<td class="editable">התאמה חלקית</td>
+<td class="editable"><strong>הצעה להפחתה:</strong> יצירת מסלול "אישור מהיר" לתכנים דיגיטליים קצרי-מועד העומדים ב"מעקות הגנה" פדגוגיים שנקבעו מראש, כדי לאפשר רלוונטיות ומהירות תגובה.</td>
+</tr>
+<tr>
+<td class="editable"><strong>פיתוח מקצועי והכשרת עובדים</strong></td>
+<td class="editable">מודלים של השתלמויות וגמולים המבוססים על מבנה ותקינה קיימים.</td>
+<td class="editable">דורש התאמה</td>
+<td class="editable"><strong>הצעה להפחתה:</strong> גמישות בהכרה במודלים חדשים של למידה (כמו מיקרו-למידה, למידת עמיתים בקהילות דיגיטליות) לצורכי גמול והתפתחות מקצועית.</td>
+</tr>
+<tr>
+<td class="editable"><strong>אבטחת מידע והגנת הפרטיות</strong></td>
+<td class="editable">עמידה בתקני אבטחת מידע מחמירים של משרד החינוך.</td>
+<td class="editable">מחויבות מלאה</td>
+<td class="editable">ביצוע סקר סיכוני אבטחת מידע ופרטיות (PIA) ויישום מלא של המלצותיו. אין בקשה להפחתה רגולטורית בסעיף זה.</td>
+</tr>
+<tr>
+<td class="editable"><strong>מבנה ארגוני ותקינה</strong></td>
+<td class="editable">הגדרות תפקיד, דרגות ותקינה המותאמים למבנה היררכי מסורתי.</td>
+<td class="editable">דורש התאמה יסודית</td>
+<td class="editable"><strong>הצעה להפחתה:</strong> אישור זמני (למסגרת הפיילוט) של מבנה התקינה החדש (סקוואדים, צ'פטרים), והגדרות תפקידים חדשות, לצורך בחינת יעילות המודל.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section id="executive-summary-section" class="section">
+<div class="section-header editable">📝 סיכום מנהלים והמלצות</div>
+<div class="risks-container">
+<div class="summary-box" style="margin-bottom: 40px;">
+<h3 style="text-align: center; color: #2c3e50; font-size: 1.8em; margin-bottom: 20px;" class="editable">סיכום מנהלים</h3>
+<p class="editable">פרויקט "אגף חברה ונוער 3.0" הוא מהלך טרנספורמציה אסטרטגי, שאפתני וחיוני, המבקש להתאים את החינוך החברתי-ערכי לאתגרי המאה ה-21. הפרויקט מציג חזון קוהרנטי המשלב חדשנות פדגוגית, טכנולוגית וארגונית. ניתוח הסיכונים מצביע על כך שהאתגרים המרכזיים אינם טכנולוגיים במהותם, אלא אנושיים ופדגוגיים: הבטחת עומק חינוכי, מניעת שחיקת הצוותים בשטח, והבטחת שוויון הזדמנויות. רמת החדשנות הגבוהה והצורך בשינויים מבניים ותפיסתיים מחייבים גישה אסדרתית גמישה ותומכת. תוכנית ההתמודדות המוצעת מתמקדת ביצירת איזון בין חדשנות לבין שמירה על ליבה ערכית יציבה, ובין הטמעת שינויים לבין תמיכה והעצמה של אנשי החינוך. הצלחת הפרויקט תלויה ביכולת לנהל את השינוי באופן הדרגתי, מושכל ורגיש להקשר האנושי.</p>
+</div>
+<div class="summary-box">
+<h3 style="text-align: center; color: #2c3e50; font-size: 1.8em; margin-bottom: 20px;" class="editable">המלצות קונקרטיות לוועדה</h3>
+<p class="editable" style="text-align: right; margin-bottom: 20px;">
+לאור הניתוח, מוגשות ההמלצות הבאות לאישור הוועדה:
+</p>
+<ul class="impact-list" style="list-style: none;">
+
+<li class="editable" style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 15px; border-right: 4px solid #3498db;">
+<strong>אישור הפרויקט במסלול "ארגז חול רגולטורי":</strong> מומלץ לאשר את הפרויקט לתקופת פיילוט של שנתיים, תוך מתן ההקלות הרגולטוריות הנדרשות בתחומי אישור תכנים, גמישות תקינה ומודלים של פיתוח מקצועי, כפי שפורט בדוח. (מענה ישיר למטרות 1, 2, 3)
+</li>
+
+<li class="editable" style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 15px; border-right: 4px solid #27ae60;">
+<strong>דרישה להקמת "ועדת היגוי פדגוגית":</strong> יש לדרוש מהמפעיל להקים, תוך 60 יום, ועדת היגוי פדגוגית שתנסח ותפקח על יישום "מעקות ההגנה" הפדגוגיים. הוועדה תבטיח שכל תוכן ויוזמה יקדמו חינוך ערכי משמעותי. (מענה ישיר למטרה 1: קידום חינוך רלוונטי וערכי)
+</li>
+
+<li class="editable" style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 15px; border-right: 4px solid #f39c12;">
+<strong>התניית האישור בהצגת תוכנית הטמעה ותמיכה מפורטת:</strong> מומלץ לאשר את הפרויקט בתנאי שהמפעיל יציג לוועדה, תוך 90 יום, תוכנית מפורטת להכשרה, ליווי ותמיכה באנשי השטח, הכוללת מנגנוני משוב ודרכי התמודדות עם עומס ושחיקה. (מענה ישיר למטרה 2: פיתוח מבנה ארגוני תומך שטח)
+</li>
+
+<li class="editable" style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-right: 4px solid #e74c3c;">
+<strong>דרישה לביצוע ומעקב אחר "מדדי שוויון":</strong> יש לדרוש מהמפעיל להגדיר ולהציג לוועדה מדדי שוויון ברורים, ולדווח עליהם באופן חצי-שנתי. הדיווח יתמקד בזיהוי פערים בשימוש ובאימפקט בין אוכלוסיות שונות, ויציג צעדים אופרטיביים לצמצומם. (מענה ישיר למטרה 3: יצירת מערכת למידה מבוססת נתונים)
+</li>
+
+</ul>
+</div>
+</div>
+</section>
+
+
+<footer class="footer">
+<div class="editable">דוח ניהול סיכונים זה הוכן עבור מינהל חברה ונוער, משרד החינוך</div>
+<div class="editable" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #34495e; font-size: 0.8em; opacity: 0.7;">
+המסמך מבוסס על ניתוח מסמך התפיסה "אגף חברה ונוער 3.0" ונועד לספק תמונת מצב של הסיכונים וההזדמנויות הפדגוגיים המרכזיים בפרויקט.
+</div>
+</footer>
+
+</div>
+
+<div class="back-to-top" id="backToTop">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const editToggle = document.getElementById('editToggle');
+    const pdfExport = document.getElementById('pdfExport');
+    const htmlExport = document.getElementById('htmlExport');
+    const successMessage = document.getElementById('successMessage');
+    const backToTop = document.getElementById('backToTop');
+    
+    let isEditing = false;
+    
+    const setEditable = (isEditable) => {
+        const elements = document.querySelectorAll('.editable');
+        elements.forEach(el => {
+            el.setAttribute('contenteditable', isEditable);
+        });
+    };
+    
+    editToggle.addEventListener('click', () => {
+        isEditing = !isEditing;
+        setEditable(isEditing);
+        editToggle.textContent = isEditing ? '🔒 סיום עריכה' : '🎨 התחל עריכה';
+        editToggle.classList.toggle('active', isEditing);
+
+        successMessage.textContent = isEditing ? '✅ מצב עריכה הופעל!' : '🔒 מצב עריכה הופסק.';
+        successMessage.classList.add('show');
+        setTimeout(() => successMessage.classList.remove('show'), 3000);
+    });
+    
+    pdfExport.addEventListener('click', () => {
+        if (isEditing) {
+            alert('יש לסיים את מצב העריכה לפני ייצוא ל-PDF.');
+            return;
+        }
+
+        const element = document.querySelector('.container');
+        const originalTitle = document.title;
+        const projectNameElement = document.querySelector('.header .subtitle');
+        const projectName = projectNameElement ? projectNameElement.textContent.trim() : 'RiskReport';
+
+        document.title = projectName; // Set document title for PDF filename
+        pdfExport.textContent = '...מייצא';
+        pdfExport.classList.add('exporting');
+        
+        const opt = {
+            margin:       0,
+            filename:     `${projectName}.pdf`,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true, logging: false },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().from(element).set(opt).save().then(() => {
+            pdfExport.textContent = '📄 ייצוא ל-PDF';
+            pdfExport.classList.remove('exporting');
+            document.title = originalTitle;
+        });
+    });
+
+    htmlExport.addEventListener('click', () => {
+        if (isEditing) {
+            alert('יש לסיים את מצב העריכה לפני שמירה כ-HTML.');
+            return;
+        }
+
+        // Clone the entire document to avoid modifying the live one
+        const clonedDocument = document.documentElement.cloneNode(true);
+        
+        // Remove interactive elements from the clone
+        clonedDocument.querySelector('#editToggle')?.remove();
+        clonedDocument.querySelector('#pdfExport')?.remove();
+        clonedDocument.querySelector('#htmlExport')?.remove();
+        clonedDocument.querySelector('#backToTop')?.remove();
+        clonedDocument.querySelector('#successMessage')?.remove();
+        clonedDocument.querySelectorAll('script').forEach(script => script.remove());
+        
+        // Ensure all elements are no longer editable
+        clonedDocument.querySelectorAll('[contenteditable="true"]').forEach(el => {
+            el.setAttribute('contenteditable', 'false');
+        });
+
+        const htmlContent = clonedDocument.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const projectNameElement = document.querySelector('.header .subtitle');
+        const projectName = projectNameElement ? projectNameElement.textContent.trim() : 'RiskReport';
+        
+        a.href = url;
+        a.download = `${projectName}.html`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+    
+    // Back to top button visibility
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === entry.target.id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, { rootMargin: '-30% 0px -70% 0px' });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+</script>
+</body>
+</html>
