@@ -75,124 +75,6 @@ position: relative;
 z-index: 1;
 }
 
-.edit-toggle {
-position: fixed;
-top: 20px;
-left: 20px;
-background: #3498db;
-color: white;
-border: none;
-padding: 15px 25px;
-border-radius: 25px;
-cursor: pointer;
-font-size: 1em;
-font-weight: bold;
-box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
-z-index: 1000;
-transition: all 0.3s ease;
-}
-
-.edit-toggle:hover {
-background: #2980b9;
-transform: translateY(-2px);
-}
-
-.edit-toggle.active {
-background: #27ae60;
-}
-
-.pdf-export {
-position: fixed;
-top: 80px;
-left: 20px;
-background: #e74c3c;
-color: white;
-border: none;
-padding: 15px 25px;
-border-radius: 25px;
-cursor: pointer;
-font-size: 1em;
-font-weight: bold;
-box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
-z-index: 1000;
-transition: all 0.3s ease;
-}
-
-.html-export {
-position: fixed;
-top: 140px;
-left: 20px;
-background: #9b59b6;
-color: white;
-border: none;
-padding: 15px 25px;
-border-radius: 25px;
-cursor: pointer;
-font-size: 1em;
-font-weight: bold;
-box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
-z-index: 1000;
-transition: all 0.3s ease;
-}
-
-.html-export:hover {
-background: #8e44ad;
-transform: translateY(-2px);
-}
-
-.pdf-export:hover {
-background: #c0392b;
-transform: translateY(-2px);
-}
-
-.pdf-export.exporting {
-background: #f39c12;
-cursor: not-allowed;
-}
-
-.editable {
-padding: 3px;
-border-radius: 3px;
-transition: all 0.3s ease;
-}
-
-.editable[contenteditable="true"] {
-background: rgba(52, 152, 219, 0.1);
-border: 2px dashed #3498db;
-outline: none;
-cursor: text;
-padding: 5px;
-}
-
-.editable[contenteditable="true"]:hover {
-background: rgba(52, 152, 219, 0.2);
-}
-
-.editable[contenteditable="true"]:focus {
-background: rgba(52, 152, 219, 0.15);
-box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
-}
-
-.success-message {
-position: fixed;
-top: 100px;
-right: 20px;
-background: #27ae60;
-color: white;
-padding: 15px 25px;
-border-radius: 10px;
-font-weight: bold;
-opacity: 0;
-transform: translateX(400px);
-transition: all 0.3s ease;
-z-index: 1001;
-}
-
-.success-message.show {
-opacity: 1;
-transform: translateX(0);
-}
-
 .nav-menu {
 position: sticky;
 top: 0;
@@ -818,25 +700,6 @@ left: 20px;
 width: 45px;
 height: 45px;
 }
-
-.edit-toggle {
-top: 10px;
-left: 10px;
-padding: 12px 20px;
-font-size: 0.9em;
-}
-.pdf-export {
-top: 65px;
-left: 10px;
-padding: 12px 20px;
-font-size: 0.9em;
-}
-.html-export {
-top: 120px;
-left: 10px;
-padding: 12px 20px;
-font-size: 0.9em;
-}
 }
 
 html {
@@ -867,7 +730,7 @@ scroll-behavior: smooth;
         border-radius: 0 !important;
     }
     
-    .edit-toggle, .pdf-export, .html-export, .back-to-top, .nav-menu {
+    .back-to-top, .nav-menu {
         display: none !important;
     }
     
@@ -1265,16 +1128,11 @@ scroll-behavior: smooth;
 </head>
 <body>
 <div class="container">
-<button class="edit-toggle" id="editToggle">🎨 התחל עריכה</button>
-<button class="pdf-export" id="pdfExport">📄 ייצוא ל-PDF</button>
-<button class="html-export" id="htmlExport">💾 שמור כ-HTML</button>
-
-<div class="success-message" id="successMessage">✅ מצב עריכה הופעל!</div>
 
 <header class="header">
-<h1 class="editable">דוח ניהול סיכונים מקיף</h1>
-<div class="subtitle editable">קול קורא להקמת ניסויים וארגזי חול רגולטוריים בבינה מלאכותית</div>
-<div class="date-badge editable">משרד החדשנות, המדע והטכנולוגיה ושותפים • 2025</div>
+<h1>דוח ניהול סיכונים מקיף</h1>
+<div class="subtitle">קול קורא להקמת ניסויים וארגזי חול רגולטוריים בבינה מלאכותית</div>
+<div class="date-badge">משרד החדשנות, המדע והטכנולוגיה ושותפים • 2025</div>
 </header>
 
 <nav class="nav-menu">
@@ -1290,186 +1148,186 @@ scroll-behavior: smooth;
 </nav>
 
 <section id="project" class="section">
-<div class="section-header editable">📋 הגדרת הפרויקט</div>
+<div class="section-header">📋 הגדרת הפרויקט</div>
 
 <div class="project-overview">
-<h2 style="text-align: center; color: #2c3e50; font-size: 2.2em; margin-bottom: 30px;" class="editable">פרטי הפרויקט</h2>
+<h2 style="text-align: center; color: #2c3e50; font-size: 2.2em; margin-bottom: 30px;">פרטי הפרויקט</h2>
 <div class="overview-grid">
 <div class="overview-card">
-<h4><span class="icon">👤</span><span class="editable">מנהל הפרויקט</span></h4>
-<p class="editable">המרכז לרגולציה ומדיניות בינה מלאכותית</p>
+<h4><span class="icon">👤</span>מנהל הפרויקט</h4>
+<p>המרכז לרגולציה ומדיניות בינה מלאכותית</p>
 </div>
 <div class="overview-card">
-<h4><span class="icon">🏢</span><span class="editable">ארגון</span></h4>
-<p class="editable">משרד החדשנות, המדע והטכנולוגיה</p>
+<h4><span class="icon">🏢</span>ארגון</h4>
+<p>משרד החדשנות, המדע והטכנולוגיה</p>
 </div>
 <div class="overview-card">
-<h4><span class="icon">🌍</span><span class="editable">היקף הפרויקט</span></h4>
-<p class="editable">כלל משרדי הממשלה ויחידות הסמך (למעט חריגים)</p>
+<h4><span class="icon">🌍</span>היקף הפרויקט</h4>
+<p>כלל משרדי הממשלה ויחידות הסמך (למעט חריגים)</p>
 </div>
 <div class="overview-card">
-<h4><span class="icon">📅</span><span class="editable">לוח זמנים</span></h4>
-<p class="editable">הגשה עד 16.10.2025, הפעלת הניסויים עד 6 חודשים מהזכייה</p>
+<h4><span class="icon">📅</span>לוח זמנים</h4>
+<p>הגשה עד 16.10.2025, הפעלת הניסויים עד 6 חודשים מהזכייה</p>
 </div>
 <div class="overview-card">
-<h4><span class="icon">🚀</span><span class="editable">סוג הפרויקט</span></h4>
-<p class="editable">תוכנית תמיכה וליווי ממשלתית לקידום חדשנות</p>
+<h4><span class="icon">🚀</span>סוג הפרויקט</h4>
+<p>תוכנית תמיכה וליווי ממשלתית לקידום חדשנות</p>
 </div>
 <div class="overview-card">
-<h4><span class="icon">🤝</span><span class="editable">שותפים רגולטורים</span></h4>
-<p class="editable">רשות החדשנות, משרד האוצר, רשות האסדרה, משרד המשפטים</p>
+<h4><span class="icon">🤝</span>שותפים רגולטורים</h4>
+<p>רשות החדשנות, משרד האוצר, רשות האסדרה, משרד המשפטים</p>
 </div>
 </div>
 </div>
 
 <div class="goals-section">
-<h3 class="editable">🎯 מטרות הפרויקט (עד 3 מטרות מרכזיות)</h3>
-<div class="goal-item editable"><strong>1. האצת פיתוח והטמעת AI אחראי במשק הישראלי:</strong> לעודד חדשנות ולסייע בהסרת חסמים רגולטוריים המעכבים פיתוח ואימוץ של מערכות בינה מלאכותית, תוך חיזוק המובילות הבינלאומית של ישראל.</div>
-<div class="goal-item editable"><strong>2. הקטנת אי-ודאות רגולטורית וגיבוש מדיניות מבוססת-ניסיון:</strong> לאפשר לרגולטורים ללמוד את טכנולוגיות ה-AI בסביבה מבוקרת, להגדיל את הוודאות עבור התעשייה ולגבש מדיניות ואסדרה עתידית על בסיס ניסיון מהשטח.</div>
-<div class="goal-item editable"><strong>3. בניית יכולות וקידום שיתופי פעולה בין-משרדיים בתחום ה-AI:</strong> ליצור מסגרת ממשלתית תומכת לניסויים, לבנות יכולות מקצועיות במשרדי הממשלה השונים ולקדם שיתופי פעולה לפתרון בעיות רב-תחומיות.</div>
+<h3>🎯 מטרות הפרויקט (עד 3 מטרות מרכזיות)</h3>
+<div class="goal-item"><strong>1. האצת פיתוח והטמעת AI אחראי במשק הישראלי:</strong> לעודד חדשנות ולסייע בהסרת חסמים רגולטוריים המעכבים פיתוח ואימוץ של מערכות בינה מלאכותית, תוך חיזוק המובילות הבינלאומית של ישראל.</div>
+<div class="goal-item"><strong>2. הקטנת אי-ודאות רגולטורית וגיבוש מדיניות מבוססת-ניסיון:</strong> לאפשר לרגולטורים ללמוד את טכנולוגיות ה-AI בסביבה מבוקרת, להגדיל את הוודאות עבור התעשייה ולגבש מדיניות ואסדרה עתידית על בסיס ניסיון מהשטח.</div>
+<div class="goal-item"><strong>3. בניית יכולות וקידום שיתופי פעולה בין-משרדיים בתחום ה-AI:</strong> ליצור מסגרת ממשלתית תומכת לניסויים, לבנות יכולות מקצועיות במשרדי הממשלה השונים ולקדם שיתופי פעולה לפתרון בעיות רב-תחומיות.</div>
 </div>
 
 <div class="goals-section">
-<h3 class="editable">📋 תוצרים מצופים</h3>
-<div class="deliverable-item editable">בחירה וליווי של מספר פרויקטים (ניסויים וארגזי חול) במשרדי ממשלה שונים.</div>
-<div class="deliverable-item editable">הפעלת ניסויים בפועל, הכוללים חברות מהתעשייה, בתוך כשנה מפרסום הקול הקורא.</div>
-<div class="deliverable-item editable">הפקת דוחות מסכמים ותובנות מכל ניסוי, שישותפו בפורום הבין-משרדי.</div>
-<div class="deliverable-item editable">גיבוש המלצות למדיניות או לשינויי אסדרה כתוצאה מהניסויים.</div>
+<h3>📋 תוצרים מצופים</h3>
+<div class="deliverable-item">בחירה וליווי של מספר פרויקטים (ניסויים וארגזי חול) במשרדי ממשלה שונים.</div>
+<div class="deliverable-item">הפעלת ניסויים בפועל, הכוללים חברות מהתעשייה, בתוך כשנה מפרסום הקול הקורא.</div>
+<div class="deliverable-item">הפקת דוחות מסכמים ותובנות מכל ניסוי, שישותפו בפורום הבין-משרדי.</div>
+<div class="deliverable-item">גיבוש המלצות למדיניות או לשינויי אסדרה כתוצאה מהניסויים.</div>
 </div>
 </section>
 
 <section id="risks" class="section">
-<div class="section-header editable">⚠️ ניהול סיכונים</div>
+<div class="section-header">⚠️ ניהול סיכונים</div>
 
 <div class="risks-container">
 <div class="risk-summary">
 <div class="summary-card">
-<div class="summary-number very-high editable">0</div>
-<div class="editable">סיכונים בחומרה<br>גבוהה מאוד</div>
+<div class="summary-number very-high">0</div>
+<div>סיכונים בחומרה<br>גבוהה מאוד</div>
 </div>
 <div class="summary-card">
-<div class="summary-number high editable">1</div>
-<div class="editable">סיכונים בחומרה<br>גבוהה</div>
+<div class="summary-number high">1</div>
+<div>סיכונים בחומרה<br>גבוהה</div>
 </div>
 <div class="summary-card">
-<div class="summary-number medium editable">3</div>
-<div class="editable">סיכונים בחומרה<br>בינונית</div>
+<div class="summary-number medium">3</div>
+<div>סיכונים בחומרה<br>בינונית</div>
 </div>
 <div class="summary-card">
-<div class="summary-number low editable">0</div>
-<div class="editable">סיכונים בחומרה<br>נמוכה</div>
+<div class="summary-number low">0</div>
+<div>סיכונים בחומרה<br>נמוכה</div>
 </div>
 </div>
 
 <div class="risks-grid">
 <div class="risk-card risk-high">
 <div class="risk-header">
-<div class="risk-title editable">משיכת הצעות בעלות אימפקט נמוך (נגזר ממטרה 1: האצת פיתוח והטמעה)</div>
+<div class="risk-title">משיכת הצעות בעלות אימפקט נמוך (נגזר ממטרה 1: האצת פיתוח והטמעה)</div>
 <div class="risk-severity severity-high">חומרה גבוהה</div>
 </div>
 <div class="risk-metrics">
-<div class="metric"><div class="metric-value editable">7</div><div class="metric-label">הסתברות (1-10)</div></div>
-<div class="metric"><div class="metric-value editable">7</div><div class="metric-label">נזק (1-10)</div></div>
-<div class="metric"><div class="metric-value editable">49</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
+<div class="metric"><div class="metric-value">7</div><div class="metric-label">הסתברות (1-10)</div></div>
+<div class="metric"><div class="metric-value">7</div><div class="metric-label">נזק (1-10)</div></div>
+<div class="metric"><div class="metric-value">49</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
 </div>
-<div class="risk-description editable">הקול הקורא עלול למשוך הצעות ממשרדים לניסויים פשוטים או בתחומים שבהם אין חסם רגולטורי אמיתי, מה שיוביל לבזבוז משאבי תמיכה וליווי על פרויקטים שאינם מקדמים חדשנות משמעותית או פותרים בעיות מורכבות.</div>
+<div class="risk-description">הקול הקורא עלול למשוך הצעות ממשרדים לניסויים פשוטים או בתחומים שבהם אין חסם רגולטורי אמיתי, מה שיוביל לבזבוז משאבי תמיכה וליווי על פרויקטים שאינם מקדמים חדשנות משמעותית או פותרים בעיות מורכבות.</div>
 <div class="risk-impact">
-<h5 class="impact-title editable">השלכות פוטנציאליות</h5>
+<h5 class="impact-title">השלכות פוטנציאליות</h5>
 <ul class="impact-list">
-<li class="editable">הקצאת תקציב וליווי מקצועי לפרויקטים שלא יניבו ערך משמעותי למשק או למדיניות.</li>
-<li class="editable">כישלון בהדגמת הערך של "ארגזי חול" ככלי מדיניות, מה שעלול לפגוע ביוזמות עתידיות.</li>
-<li class="editable">תת-ניצול של ההזדמנות לפתור אתגרי AI מורכבים ומשמעותיים.</li>
+<li>הקצאת תקציב וליווי מקצועי לפרויקטים שלא יניבו ערך משמעותי למשק או למדיניות.</li>
+<li>כישלון בהדגמת הערך של "ארגזי חול" ככלי מדיניות, מה שעלול לפגוע ביוזמות עתידיות.</li>
+<li>תת-ניצול של ההזדמנות לפתור אתגרי AI מורכבים ומשמעותיים.</li>
 </ul>
 </div>
 <div class="risk-opportunity">
-<h5 class="opportunity-title editable">הזדמנויות לשיפור</h5>
+<h5 class="opportunity-title">הזדמנויות לשיפור</h5>
 <ul class="opportunity-list">
-<li class="editable">מיקוד מאמצי הליווי וה-"מאיץ" בזיהוי ועיצוב פרואקטיבי של הצעות איכותיות.</li>
-<li class="editable">הזדמנות להגדיר ולהדגים מהי "בעיה רגולטורית משמעותית" הראויה לניסוי.</li>
+<li>מיקוד מאמצי הליווי וה-"מאיץ" בזיהוי ועיצוב פרואקטיבי של הצעות איכותיות.</li>
+<li>הזדמנות להגדיר ולהדגים מהי "בעיה רגולטורית משמעותית" הראויה לניסוי.</li>
 </ul>
 </div>
 </div>
 
 <div class="risk-card risk-medium">
 <div class="risk-header">
-<div class="risk-title editable">קיבעון רגולטורי או "למידה עקרה" (נגזר ממטרה 2: הקטנת אי-ודאות)</div>
+<div class="risk-title">קיבעון רגולטורי או "למידה עקרה" (נגזר ממטרה 2: הקטנת אי-ודאות)</div>
 <div class="risk-severity severity-medium">חומרה בינונית</div>
 </div>
 <div class="risk-metrics">
-<div class="metric"><div class="metric-value editable">6</div><div class="metric-label">הסתברות (1-10)</div></div>
-<div class="metric"><div class="metric-value editable">8</div><div class="metric-label">נזק (1-10)</div></div>
-<div class="metric"><div class="metric-value editable">48</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
+<div class="metric"><div class="metric-value">6</div><div class="metric-label">הסתברות (1-10)</div></div>
+<div class="metric"><div class="metric-value">8</div><div class="metric-label">נזק (1-10)</div></div>
+<div class="metric"><div class="metric-value">48</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
 </div>
-<div class="risk-description editable">משרדים ממשלתיים עלולים לנקוט בגישה שמרנית מדי, להעניק הקלות רגולטוריות מינימליות, ובכך למנוע מהניסוי לייצר תובנות חדשות. כתוצאה מכך, ארגז החול לא יצליח להפחית אי-ודאות ולא יוביל לגיבוש מדיניות חדשה.</div>
+<div class="risk-description">משרדים ממשלתיים עלולים לנקוט בגישה שמרנית מדי, להעניק הקלות רגולטוריות מינימליות, ובכך למנוע מהניסוי לייצר תובנות חדשות. כתוצאה מכך, ארגז החול לא יצליח להפחית אי-ודאות ולא יוביל לגיבוש מדיניות חדשה.</div>
 <div class="risk-impact">
-<h5 class="impact-title editable">השלכות פוטנציאליות</h5>
+<h5 class="impact-title">השלכות פוטנציאליות</h5>
 <ul class="impact-list">
-<li class="editable">הניסויים יאשרו את המצב הקיים ולא יאתגרו הנחות יסוד רגולטוריות.</li>
-<li class="editable">התעשייה לא תקבל ודאות רגולטורית משופרת והחסמים יישארו בעינם.</li>
-<li class="editable">אובדן אמון של התעשייה והאקדמיה ביעילות הכלי של ארגזי חול רגולטוריים.</li>
+<li>הניסויים יאשרו את המצב הקיים ולא יאתגרו הנחות יסוד רגולטוריות.</li>
+<li>התעשייה לא תקבל ודאות רגולטורית משופרת והחסמים יישארו בעינם.</li>
+<li>אובדן אמון של התעשייה והאקדמיה ביעילות הכלי של ארגזי חול רגולטוריים.</li>
 </ul>
 </div>
 <div class="risk-opportunity">
-<h5 class="opportunity-title editable">הזדמנויות לשיפור</h5>
+<h5 class="opportunity-title">הזדמנויות לשיפור</h5>
 <ul class="opportunity-list">
-<li class="editable">פיתוח מתודולוגיה סדורה להגדרת "שאלות למידה" רגולטוריות לפני כל ניסוי.</li>
-<li class="editable">הזדמנות לבנות יכולת במשרדי הממשלה בתכנון ניסויים מבוקרי סיכון אך בעלי תעוזה.</li>
+<li>פיתוח מתודולוגיה סדורה להגדרת "שאלות למידה" רגולטוריות לפני כל ניסוי.</li>
+<li>הזדמנות לבנות יכולת במשרדי הממשלה בתכנון ניסויים מבוקרי סיכון אך בעלי תעוזה.</li>
 </ul>
 </div>
 </div>
 
 <div class="risk-card risk-medium">
 <div class="risk-header">
-<div class="risk-title editable">היעדר שיתוף פעולה ופתרון בעיות "בממגורות" (נגזר ממטרה 3: בניית יכולות ושיתופי פעולה)</div>
+<div class="risk-title">היעדר שיתוף פעולה ופתרון בעיות "בממגורות" (נגזר ממטרה 3: בניית יכולות ושיתופי פעולה)</div>
 <div class="risk-severity severity-medium">חומרה בינונית</div>
 </div>
 <div class="risk-metrics">
-<div class="metric"><div class="metric-value editable">8</div><div class="metric-label">הסתברות (1-10)</div></div>
-<div class="metric"><div class="metric-value editable">6</div><div class="metric-label">נזק (1-10)</div></div>
-<div class="metric"><div class="metric-value editable">48</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
+<div class="metric"><div class="metric-value">8</div><div class="metric-label">הסתברות (1-10)</div></div>
+<div class="metric"><div class="metric-value">6</div><div class="metric-label">נזק (1-10)</div></div>
+<div class="metric"><div class="metric-value">48</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
 </div>
-<div class="risk-description editable">למרות העידוד לשיתוף פעולה, משרדים עלולים להגיש הצעות המתמקדות באופן צר בתחום אחריותם בלבד, ולהימנע מטיפול באתגרים רב-תחומיים (כמו פרטיות, אבטחת מידע, תחרות) הדורשים תיאום בין-משרדי.</div>
+<div class="risk-description">למרות העידוד לשיתוף פעולה, משרדים עלולים להגיש הצעות המתמקדות באופן צר בתחום אחריותם בלבד, ולהימנע מטיפול באתגרים רב-תחומיים (כמו פרטיות, אבטחת מידע, תחרות) הדורשים תיאום בין-משרדי.</div>
 <div class="risk-impact">
-<h5 class="impact-title editable">השלכות פוטנציאליות</h5>
+<h5 class="impact-title">השלכות פוטנציאליות</h5>
 <ul class="impact-list">
-<li class="editable">פתרון חלקי ולא הוליסטי לבעיות רגולטוריות מורכבות.</li>
-<li class="editable">כפילות מאמצים בין משרדים שונים המתמודדים עם סוגיות AI דומות.</li>
-<li class="editable">החמצת ההזדמנות לבנות מודלים של שיתוף פעולה רגולטורי שישמשו בעתיד.</li>
+<li>פתרון חלקי ולא הוליסטי לבעיות רגולטוריות מורכבות.</li>
+<li>כפילות מאמצים בין משרדים שונים המתמודדים עם סוגיות AI דומות.</li>
+<li>החמצת ההזדמנות לבנות מודלים של שיתוף פעולה רגולטורי שישמשו בעתיד.</li>
 </ul>
 </div>
 <div class="risk-opportunity">
-<h5 class="opportunity-title editable">הזדמנויות לשיפור</h5>
+<h5 class="opportunity-title">הזדמנויות לשיפור</h5>
 <ul class="opportunity-list">
-<li class="editable">שימוש בוועדת ההיגוי כפלטפורמה לזיהוי סינרגיות וחיבור בין הצעות שונות.</li>
-<li class="editable">קידום פרויקטי דגל משותפים למספר משרדים כמודל להשראה.</li>
+<li>שימוש בוועדת ההיגוי כפלטפורמה לזיהוי סינרגיות וחיבור בין הצעות שונות.</li>
+<li>קידום פרויקטי דגל משותפים למספר משרדים כמודל להשראה.</li>
 </ul>
 </div>
 </div>
 
 <div class="risk-card risk-medium">
 <div class="risk-header">
-<div class="risk-title editable">"נקודות עיוורון" אתיות ונזק לאמון הציבור (נגזר ממטרות 1 ו-2)</div>
+<div class="risk-title">"נקודות עיוורון" אתיות ונזק לאמון הציבור (נגזר ממטרות 1 ו-2)</div>
 <div class="risk-severity severity-medium">חומרה בינונית</div>
 </div>
 <div class="risk-metrics">
-<div class="metric"><div class="metric-value editable">5</div><div class="metric-label">הסתברות (1-10)</div></div>
-<div class="metric"><div class="metric-value editable">9</div><div class="metric-label">נזק (1-10)</div></div>
-<div class="metric"><div class="metric-value editable">45</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
+<div class="metric"><div class="metric-value">5</div><div class="metric-label">הסתברות (1-10)</div></div>
+<div class="metric"><div class="metric-value">9</div><div class="metric-label">נזק (1-10)</div></div>
+<div class="metric"><div class="metric-value">45</div><div class="metric-label">חומרה (הסתברות x נזק)</div></div>
 </div>
-<div class="risk-description editable">משרד מגיש, מתוך התמקדות בהיבטים הטכנולוגיים והכלכליים, עלול שלא לתת מענה מספק לסיכונים אתיים, הגנה על זכויות, או חששות ציבוריים. ניסוי שיאושר ויעורר ביקורת ציבורית חריפה עלול לפגוע באמון הציבור בשימוש הממשלתי ב-AI.</div>
+<div class="risk-description">משרד מגיש, מתוך התמקדות בהיבטים הטכנולוגיים והכלכליים, עלול שלא לתת מענה מספק לסיכונים אתיים, הגנה על זכויות, או חששות ציבוריים. ניסוי שיאושר ויעורר ביקורת ציבורית חריפה עלול לפגוע באמון הציבור בשימוש הממשלתי ב-AI.</div>
 <div class="risk-impact">
-<h5 class="impact-title editable">השלכות פוטנציאליות</h5>
+<h5 class="impact-title">השלכות פוטנציאליות</h5>
 <ul class="impact-list">
-<li class="editable">פגיעה בזכויות אדם (כמו פרטיות או שוויון) במסגרת ניסוי בחסות המדינה.</li>
-<li class="editable">יצירת תגובת נגד ציבורית שתעכב אימוץ AI בתחומים נוספים.</li>
-<li class="editable">נזק תדמיתי למשרד החדשנות ולשותפים המובילים את התוכנית.</li>
+<li>פגיעה בזכויות אדם (כמו פרטיות או שוויון) במסגרת ניסוי בחסות המדינה.</li>
+<li>יצירת תגובת נגד ציבורית שתעכב אימוץ AI בתחומים נוספים.</li>
+<li>נזק תדמיתי למשרד החדשנות ולשותפים המובילים את התוכנית.</li>
 </ul>
 </div>
 <div class="risk-opportunity">
-<h5 class="opportunity-title editable">הזדמנויות לשיפור</h5>
+<h5 class="opportunity-title">הזדמנויות לשיפור</h5>
 <ul class="opportunity-list">
-<li class="editable">הזדמנות לבסס את ישראל כמובילה עולמית בחדשנות אחראית ולא רק טכנולוגית.</li>
-<li class="editable">פיתוח והטמעה של כלים ומתודולוגיות להערכת השפעה אתית וחברתית (EIA).</li>
+<li>הזדמנות לבסס את ישראל כמובילה עולמית בחדשנות אחראית ולא רק טכנולוגית.</li>
+<li>פיתוח והטמעה של כלים ומתודולוגיות להערכת השפעה אתית וחברתית (EIA).</li>
 </ul>
 </div>
 </div>
@@ -1478,39 +1336,39 @@ scroll-behavior: smooth;
 </section>
 
 <section id="strategies" class="section">
-<div class="section-header editable">📈 תוכנית התמודדות עם סיכונים</div>
+<div class="section-header">📈 תוכנית התמודדות עם סיכונים</div>
 <div class="strategies-section">
 <div class="strategy-card">
-<div class="strategy-header editable">אסטרטגיה 1: ליווי פרואקטיבי ועיצוב הצעות במסגרת ה-"מאיץ"</div>
+<div class="strategy-header">אסטרטגיה 1: ליווי פרואקטיבי ועיצוב הצעות במסגרת ה-"מאיץ"</div>
 <div class="strategy-content">
-[cite_start]<p class="editable">התמודדות עם סיכון קבלת הצעות חלשות או מבודדות, באמצעות שימוש ממוקד ב"מאיץ לניסויים וארגזי חול"[cite: 276]. במקום להמתין להצעות סופיות, צוות הקול הקורא ייזום פגישות עם משרדים פוטנציאליים, יסייע להם לזהות חסמים רגולטוריים אמיתיים ויעודד חיבורים בין-משרדיים לטיפול בבעיות רוחב עוד לפני שלב ההגשה.</p>
+<p>התמודדות עם סיכון קבלת הצעות חלשות או מבודדות, באמצעות שימוש ממוקד ב"מאיץ לניסויים וארגזי חול". במקום להמתין להצעות סופיות, צוות הקול הקורא ייזום פגישות עם משרדים פוטנציאליים, יסייע להם לזהות חסמים רגולטוריים אמיתיים ויעודד חיבורים בין-משרדיים לטיפול בבעיות רוחב עוד לפני שלב ההגשה.</p>
 <div class="strategy-detail">
 <div class="detail-item">
-<h5 class="editable">פעולות מפתח</h5>
-<p class="editable">1. קיום סדנאות ייעודיות לזיהוי אתגרי AI רב-תחומיים.<br>2. מתן עדיפות במאיץ לצוותים המשלבים נציגים ממספר משרדים.<br>3. סיוע בניסוח הצעות ערך בעלות אימפקט גבוה.</p>
+<h5>פעולות מפתח</h5>
+<p>1. קיום סדנאות ייעודיות לזיהוי אתגרי AI רב-תחומיים.<br>2. מתן עדיפות במאיץ לצוותים המשלבים נציגים ממספר משרדים.<br>3. סיוע בניסוח הצעות ערך בעלות אימפקט גבוה.</p>
 </div>
 <div class="detail-item">
-<h5 class="editable">אחריות וביצוע</h5>
-<p class="editable">המרכז לרגולציה ומדיניות AI, בשיתוף עם רשות האסדרה ורשות החדשנות.</p>
-<span class="timeline-badge editable">טווח זמן: יולי-אוקטובר 2025</span>
+<h5>אחריות וביצוע</h5>
+<p>המרכז לרגולציה ומדיניות AI, בשיתוף עם רשות האסדרה ורשות החדשנות.</p>
+<span class="timeline-badge">טווח זמן: יולי-אוקטובר 2025</span>
 </div>
 </div>
 </div>
 </div>
 
 <div class="strategy-card">
-<div class="strategy-header editable">אסטרטגיה 2: הקמת ועדת היגוי אתית-מתודולוגית</div>
+<div class="strategy-header">אסטרטגיה 2: הקמת ועדת היגוי אתית-מתודולוגית</div>
 <div class="strategy-content">
-<p class="editable">התמודדות עם סיכוני "נקודות עיוורון" אתיות וקיבעון רגולטורי. [cite_start]תוקם ועדת משנה לוועדת ההיגוי [cite: 282] שתהיה אמונה על מתן מסגרת אתית ומתודולוגית אחידה לכלל הפרויקטים הזוכים. הוועדה תספק כלים להערכת השפעה אתית, תבטיח שהניסויים מתוכננים לענות על "שאלות למידה" ברורות ותסייע באיזון בין חדשנות לשמירה על אינטרסים ציבוריים.</p>
+<p>התמודדות עם סיכוני "נקודות עיוורון" אתיות וקיבעון רגולטורי. תוקם ועדת משנה לוועדת ההיגוי שתהיה אמונה על מתן מסגרת אתית ומתודולוגית אחידה לכלל הפרויקטים הזוכים. הוועדה תספק כלים להערכת השפעה אתית, תבטיח שהניסויים מתוכננים לענות על "שאלות למידה" ברורות ותסייע באיזון בין חדשנות לשמירה על אינטרסים ציבוריים.</p>
 <div class="strategy-detail">
 <div class="detail-item">
-<h5 class="editable">פעולות מפתח</h5>
-<p class="editable">1. פיתוח "ארגז כלים אתי" חובה לכל זוכה.<br>2. אישור תכנון הניסוי והגדרת מדדי ההצלחה על ידי הוועדה.<br>3. קיום מפגשי ביניים לבחינת ההיבטים האתיים והרגולטוריים שעולים מהשטח.</p>
+<h5>פעולות מפתח</h5>
+<p>1. פיתוח "ארגז כלים אתי" חובה לכל זוכה.<br>2. אישור תכנון הניסוי והגדרת מדדי ההצלחה על ידי הוועדה.<br>3. קיום מפגשי ביניים לבחינת ההיבטים האתיים והרגולטוריים שעולים מהשטח.</p>
 </div>
 <div class="detail-item">
-<h5 class="editable">אחריות וביצוע</h5>
-<p class="editable">ועדת ההיגוי של הקול הקורא, בשיתוף ייעוץ וחקיקה במשרד המשפטים.</p>
-<span class="timeline-badge editable">טווח זמן: החל מבחירת הזוכים (נובמבר 2025)</span>
+<h5>אחריות וביצוע</h5>
+<p>ועדת ההיגוי של הקול הקורא, בשיתוף ייעוץ וחקיקה במשרד המשפטים.</p>
+<span class="timeline-badge">טווח זמן: החל מבחירת הזוכים (נובמבר 2025)</span>
 </div>
 </div>
 </div>
@@ -1518,92 +1376,92 @@ scroll-behavior: smooth;
 </section>
 
 <section id="innovation" class="section">
-<div class="section-header editable">🚀 אסדרת חדשנות</div>
+<div class="section-header">🚀 אסדרת חדשנות</div>
 <div class="risks-container">
-<p class="editable" style="text-align: center; font-size: 1.1em; margin-bottom: 25px;">
-פרויקט זה הוא בעצמו כלי של אסדרת חדשנות. הוא אינו מפתח טכנולוגיית AI, אלא יוצר "מטא-פלטפורמה" ממשלתית לניהול חדשנות טכנולוגית באופן מבוקר. [cite_start]היוזמה מאמצת את המלצות ה-OECD והאיחוד האירופי [cite: 223] לשימוש בארגזי חול רגולטוריים כדרך להתמודד עם הקצב המהיר של השינוי הטכנולוגי, ומאפשרת למדינה לפתח "שריר" של אסדרה גמישה ומסתגלת.
+<p style="text-align: center; font-size: 1.1em; margin-bottom: 25px;">
+פרויקט זה הוא בעצמו כלי של אסדרת חדשנות. הוא אינו מפתח טכנולוגיית AI, אלא יוצר "מטא-פלטפורמה" ממשלתית לניהול חדשנות טכנולוגית באופן מבוקר. היוזמה מאמצת את המלצות ה-OECD והאיחוד האירופי לשימוש בארגזי חול רגולטוריים כדרך להתמודד עם הקצב המהיר של השינוי הטכנולוגי, ומאפשרת למדינה לפתח "שריר" של אסדרה גמישה ומסתגלת.
 </p>
 <div class="summary-box">
-<h3 style="text-align: center; color: #2c3e50; font-size: 1.8em; margin-bottom: 20px;" class="editable">הגדרת רמת החדשנות</h3>
-<p class="editable">רמת החדשנות של הפרויקט היא <strong>חדשנות תהליכית-ממשלית (Process Innovation)</strong>. היא אינה טמונה בטכנולוגיה, אלא בשיטת העבודה הממשלתית שהיא מקדמת: מעבר מרגולציה מסורתית, איטית ו"מלמעלה-למטה", למודל של רגולציה ניסויית, שיתופית ומבוססת-למידה. הפרויקט הוא ניסוי במדיניות ציבורית חדשנית, שמטרתו לשנות את האופן שבו הממשלה מתמודדת עם טכנולוגיות משבשות.</p>
+<h3 style="text-align: center; color: #2c3e50; font-size: 1.8em; margin-bottom: 20px;">הגדרת רמת החדשנות</h3>
+<p>רמת החדשנות של הפרויקט היא <strong>חדשנות תהליכית-ממשלית (Process Innovation)</strong>. היא אינה טמונה בטכנולוגיה, אלא בשיטת העבודה הממשלתית שהיא מקדמת: מעבר מרגולציה מסורתית, איטית ו"מלמעלה-למטה", למודל של רגולציה ניסויית, שיתופית ומבוססת-למידה. הפרויקט הוא ניסוי במדיניות ציבורית חדשנית, שמטרתו לשנות את האופן שבו הממשלה מתמודדת עם טכנולוגיות משבשות.</p>
 <div class="committee-recommendations">
-<h4><span class="icon">👥</span><span class="editable">המלצת ועדת המשנה לאסדרת חדשנות:</span></h4>
-<p class="editable">יש לראות ביוזמה זו פרויקט דגל של חדשנות במגזר הציבורי. מומלץ להגדיר את הפרויקט כ"ארגז חול על ארגזי חול", ולתעד באופן שיטתי לא רק את תוצאות הניסויים שייבחרו, אלא גם את תהליך הלמידה של ועדת ההיגוי עצמה. התובנות מתהליך זה ישמשו לפיתוח מודלים דומים עבור טכנולוגיות עתידיות אחרות.</p>
+<h4><span class="icon">👥</span>המלצת ועדת המשנה לאסדרת חדשנות:</h4>
+<p>יש לראות ביוזמה זו פרויקט דגל של חדשנות במגזר הציבורי. מומלץ להגדיר את הפרויקט כ"ארגז חול על ארגזי חול", ולתעד באופן שיטתי לא רק את תוצאות הניסויים שייבחרו, אלא גם את תהליך הלמידה של ועדת ההיגוי עצמה. התובנות מתהליך זה ישמשו לפיתוח מודלים דומים עבור טכנולוגיות עתידיות אחרות.</p>
 </div>
 </div>
 </div>
 </section>
 
 <section id="innovation-level" class="section innovation-section">
-<div class="section-header editable">📊 רמת החדשנות בפרויקט</div>
-<p class="editable" style="font-size: 1.2em; max-width: 800px; margin: 20px auto 40px; color: rgba(255,255,255,0.9);">
+<div class="section-header">📊 רמת החדשנות בפרויקט</div>
+<p style="font-size: 1.2em; max-width: 800px; margin: 20px auto 40px; color: rgba(255,255,255,0.9);">
 הציון משקף את חדשנות הפרויקט ככלי מדיניות. הוא אינו מורכב טכנולוגית בעצמו, אך הוא מתמודד עם מורכבות טכנולוגית גבוהה, דורש שינוי ארגוני משמעותי במגזר הציבורי, ונושא בחובו סיכוני יישום ברמת המדיניות.
 </p>
-<div class="innovation-score editable">7.3 / 10</div>
+<div class="innovation-score">7.3 / 10</div>
 <div class="innovation-components">
 <div class="component-card">
-<div class="component-score editable">9</div>
-<div class="component-title editable">השפעה על מדיניות (פדגוגית)</div>
-<p class="editable">פוטנציאל לשנות מהיסוד את גישת הממשלה לאסדרת טכנולוגיות חדשות.</p>
+<div class="component-score">9</div>
+<div class="component-title">השפעה על מדיניות (פדגוגית)</div>
+<p>פוטנציאל לשנות מהיסוד את גישת הממשלה לאסדרת טכנולוגיות חדשות.</p>
 </div>
 <div class="component-card">
-<div class="component-score editable">5</div>
-<div class="component-title editable">מורכבות טכנולוגית</div>
-<p class="editable">הפרויקט עצמו אינו מורכב טכנולוגית, אך הוא מנהל ומאפשר פרויקטים בעלי מורכבות גבוהה.</p>
+<div class="component-score">5</div>
+<div class="component-title">מורכבות טכנולוגית</div>
+<p>הפרויקט עצמו אינו מורכב טכנולוגית, אך הוא מנהל ומאפשר פרויקטים בעלי מורכבות גבוהה.</p>
 </div>
 <div class="component-card">
-<div class="component-score editable">8</div>
-<div class="component-title editable">שינוי ארגוני</div>
-<p class="editable">דורש שיתוף פעולה בין-משרדי אינטנסיבי ושבירת "ממגורות" ארגוניות.</p>
+<div class="component-score">8</div>
+<div class="component-title">שינוי ארגוני</div>
+<p>דורש שיתוף פעולה בין-משרדי אינטנסיבי ושבירת "ממגורות" ארגוניות.</p>
 </div>
 <div class="component-card">
-<div class="component-score editable">7</div>
-<div class="component-title editable">סיכון יישומי (טכנולוגי)</div>
-<p class="editable">סיכון בינוני-גבוה שהמודל הניסויי לא יצליח לייצר שינוי מדיניות אמיתי או יתקל בהתנגדות בירוקרטית.</p>
+<div class="component-score">7</div>
+<div class="component-title">סיכון יישומי (טכנולוגי)</div>
+<p>סיכון בינוני-גבוה שהמודל הניסויי לא יצליח לייצר שינוי מדיניות אמיתי או יתקל בהתנגדות בירוקרטית.</p>
 </div>
 </div>
 </section>
 
 <section id="regulation-compliance" class="section">
-<div class="section-header editable">✅ התאמה לדרישות אסדרה</div>
+<div class="section-header">✅ התאמה לדרישות אסדרה</div>
 <div class="regulation-section">
-<p class="editable" style="font-size: 1.1em; text-align: center; margin-bottom: 30px;">
+<p style="font-size: 1.1em; text-align: center; margin-bottom: 30px;">
 הפרויקט עצמו פועל בהתאם למנדט הממשלתי לעידוד חדשנות. הטבלה מפרטת את התאמת תהליך ניהול הקול הקורא לדרישות שהוגדרו במסמך הקול הקורא עצמו. "ההפחתה הרגולטורית" היא מטרת הליבה של הפרויקט – לאפשר למשרדים המשתתפים להציע הקלות כאלה במסגרת הניסויים שינהלו.
 </p>
 <div class="regulation-table">
 <table>
 <thead>
 <tr>
-<th class="editable">דרישת אסדרה</th>
-<th class="editable">תיאור</th>
-<th class="editable">סטטוס התאמה</th>
-<th class="editable">פעולות נדרשות</th>
+<th>דרישת אסדרה</th>
+<th>תיאור</th>
+<th>סטטוס התאמה</th>
+<th>פעולות נדרשות</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="editable"><strong>עמידה בתנאי סף</strong></td>
-[cite_start]<td class="editable">בדיקה שההצעות המוגשות עומדות בתנאי הסף, כגון זהות המציע[cite: 234].</td>
-<td class="editable">מחויבות מלאה</td>
-<td class="editable">הפעלת תהליך סינון ראשוני לכל ההצעות שיוגשו.</td>
+<td><strong>עמידה בתנאי סף</strong></td>
+<td>בדיקה שההצעות המוגשות עומדות בתנאי הסף, כגון זהות המציע.</td>
+<td>מחויבות מלאה</td>
+<td>הפעלת תהליך סינון ראשוני לכל ההצעות שיוגשו.</td>
 </tr>
 <tr>
-<td class="editable"><strong>הערכה לפי קריטריונים</strong></td>
-[cite_start]<td class="editable">בחינת ההצעות באופן תחרותי על פי הקריטריונים שפורסמו בסעיף 4 לקול הקורא[cite: 248].</td>
-<td class="editable">מחויבות מלאה</td>
-<td class="editable">קיום תהליך הערכה סדור ושקוף על ידי ועדת ההיגוי.</td>
+<td><strong>הערכה לפי קריטריונים</strong></td>
+<td>בחינת ההצעות באופן תחרותי על פי הקריטריונים שפורסמו בסעיף 4 לקול הקורא.</td>
+<td>מחויבות מלאה</td>
+<td>קיום תהליך הערכה סדור ושקוף על ידי ועדת ההיגוי.</td>
 </tr>
 <tr>
-<td class="editable"><strong>הקצאת משאבים</strong></td>
-[cite_start]<td class="editable">הענקת סיוע תקציבי וליווי מקצועי ומשפטי לזוכים, בהתאם להתחייבות[cite: 284].</td>
-<td class="editable">מחויבות מלאה</td>
-<td class="editable">העברת התקציבים והקצאת כוח האדם הנדרש לליווי הפרויקטים הזוכים.</td>
+<td><strong>הקצאת משאבים</strong></td>
+<td>הענקת סיוע תקציבי וליווי מקצועי ומשפטי לזוכים, בהתאם להתחייבות.</td>
+<td>מחויבות מלאה</td>
+<td>העברת התקציבים והקצאת כוח האדם הנדרש לליווי הפרויקטים הזוכים.</td>
 </tr>
 <tr>
-<td class="editable"><strong>פיקוח ובקרה</strong></td>
-[cite_start]<td class="editable">קיום בקרה עיתית על התקדמות הפרויקטים הזוכים בהתאם לאבני דרך שיוגדרו[cite: 301].</td>
-<td class="editable">מחויבות מלאה</td>
-<td class="editable">כינוס ועדת ההיגוי למעקב, ודרישת דוחות התקדמות מהזוכים.</td>
+<td><strong>פיקוח ובקרה</strong></td>
+<td>קיום בקרה עיתית על התקדמות הפרויקטים הזוכים בהתאם לאבני דרך שיוגדרו.</td>
+<td>מחויבות מלאה</td>
+<td>כינוס ועדת ההיגוי למעקב, ודרישת דוחות התקדמות מהזוכים.</td>
 </tr>
 </tbody>
 </table>
@@ -1612,28 +1470,28 @@ scroll-behavior: smooth;
 </section>
 
 <section id="executive-summary-section" class="section">
-<div class="section-header editable">📝 סיכום מנהלים והמלצות</div>
+<div class="section-header">📝 סיכום מנהלים והמלצות</div>
 <div class="risks-container">
 <div class="summary-box" style="margin-bottom: 40px;">
-<h3 style="text-align: center; color: #2c3e50; font-size: 1.8em; margin-bottom: 20px;" class="editable">סיכום מנהלים</h3>
-<p class="editable">הקול הקורא להקמת ניסויים וארגזי חול רגולטוריים ב-AI הוא יוזמה אסטרטגית חשובה, הממקמת את ישראל בחזית המדינות המפתחות אסדרה גמישה וחדשנית. הפרויקט אינו רק תומך בתעשיית ה-AI, אלא בעיקר בונה יכולות חדשות במגזר הציבורי להתמודדות עם טכנולוגיות משבשות. ניתוח הסיכונים מראה שהאתגרים המרכזיים אינם בתקצוב או במציאת חברות, אלא בהבטחת איכות ורלוונטיות: משיכת הצעות בעלות אימפקט גבוה, עידוד חשיבה רב-תחומית ושבירת "ממגורות", והבטחה שהחדשנות נעשית באופן אחראי השומר על אמון הציבור. ההצלחה תימדד לא רק במספר הניסויים שיוקמו, אלא באיכות הלמידה הרגולטורית שתופק מהם וביכולתם להוביל לשינויי מדיניות אמיתיים.</p>
+<h3 style="text-align: center; color: #2c3e50; font-size: 1.8em; margin-bottom: 20px;">סיכום מנהלים</h3>
+<p>הקול הקורא להקמת ניסויים וארגזי חול רגולטוריים ב-AI הוא יוזמה אסטרטגית חשובה, הממקמת את ישראל בחזית המדינות המפתחות אסדרה גמישה וחדשנית. הפרויקט אינו רק תומך בתעשיית ה-AI, אלא בעיקר בונה יכולות חדשות במגזר הציבורי להתמודדות עם טכנולוגיות משבשות. ניתוח הסיכונים מראה שהאתגרים המרכזיים אינם בתקצוב או במציאת חברות, אלא בהבטחת איכות ורלוונטיות: משיכת הצעות בעלות אימפקט גבוה, עידוד חשיבה רב-תחומית ושבירת "ממגורות", והבטחה שהחדשנות נעשית באופן אחראי השומר על אמון הציבור. ההצלחה תימדד לא רק במספר הניסויים שיוקמו, אלא באיכות הלמידה הרגולטורית שתופק מהם וביכולתם להוביל לשינויי מדיניות אמיתיים.</p>
 </div>
 <div class="summary-box">
-<h3 style="text-align: center; color: #2c3e50; font-size: 1.8em; margin-bottom: 20px;" class="editable">המלצות קונקרטיות לוועדה</h3>
-<p class="editable" style="text-align: right; margin-bottom: 20px;">
+<h3 style="text-align: center; color: #2c3e50; font-size: 1.8em; margin-bottom: 20px;">המלצות קונקרטיות לוועדה</h3>
+<p style="text-align: right; margin-bottom: 20px;">
 לאור הניתוח, מוגשות ההמלצות הבאות לוועדת ההיגוי של הקול הקורא:
 </p>
 <ul class="impact-list" style="list-style: none;">
 
-<li class="editable" style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 15px; border-right: 4px solid #3498db;">
-[cite_start]<strong>מינוף פרואקטיבי של ה"מאיץ":</strong> מומלץ לאשר את הפרויקט בתנאי שוועדת ההיגוי תנקוט בגישה פרואקטיבית ותשתמש ב"מאיץ" [cite: 276] לא רק למענה על שאלות, אלא גם לזיהוי ועיצוב אקטיבי של הצעות איכותיות ובין-משרדיות עוד בטרם ההגשה. (מענה ישיר למטרה 1: האצת פיתוח והטמעה)
+<li style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 15px; border-right: 4px solid #3498db;">
+<strong>מינוף פרואקטיבי של ה"מאיץ":</strong> מומלץ לאשר את הפרויקט בתנאי שוועדת ההיגוי תנקוט בגישה פרואקטיבית ותשתמש ב"מאיץ" לא רק למענה על שאלות, אלא גם לזיהוי ועיצוב אקטיבי של הצעות איכותיות ובין-משרדיות עוד בטרם ההגשה. (מענה ישיר למטרה 1: האצת פיתוח והטמעה)
 </li>
 
-<li class="editable" style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 15px; border-right: 4px solid #27ae60;">
-[cite_start]<strong>דרישה לתבנית דיווח אחידה:</strong> יש לדרוש מהמפעיל לפתח תבנית דיווח מסכם אחידה [cite: 300] שתחייב את כל הזוכים. התבנית תתמקד ב"שאלות הלמידה" הרגולטוריות שהוגדרו, בנתונים שנאספו ובהמלצות קונקרטיות לשינוי מדיניות. זאת, כדי לאפשר לוועדה להפיק תובנות רוחב חוצות-משרדים. (מענה ישיר למטרה 2: גיבוש מדיניות מבוססת-ניסיון)
+<li style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 15px; border-right: 4px solid #27ae60;">
+<strong>דרישה לתבנית דיווח אחידה:</strong> יש לדרוש מהמפעיל לפתח תבנית דיווח מסכם אחידה שתחייב את כל הזוכים. התבנית תתמקד ב"שאלות הלמידה" הרגולטוריות שהוגדרו, בנתונים שנאספו ובהמלצות קונקרטיות לשינוי מדיניות. זאת, כדי לאפשר לוועדה להפיק תובנות רוחב חוצות-משרדים. (מענה ישיר למטרה 2: גיבוש מדיניות מבוססת-ניסיון)
 </li>
 
-<li class="editable" style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-right: 4px solid #f39c12;">
+<li style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-right: 4px solid #f39c12;">
 <strong>הקמת "צוות אתיקה" מייעץ:</strong> מומלץ להקים צוות משנה לוועדת ההיגוי, שיספק ליווי וייעוץ אתי לכלל הפרויקטים הזוכים. הצוות יבטיח הטמעת עקרונות של AI אחראי, יסייע בזיהוי "נקודות עיוורון" אתיות, ויבנה יכולת פנימית במשרדים בתחום קריטי זה. (מענה ישיר למטרה 3: בניית יכולות)
 </li>
 
@@ -1644,8 +1502,8 @@ scroll-behavior: smooth;
 
 
 <footer class="footer">
-<div class="editable">דוח ניהול סיכונים זה הוכן עבור ועדת ההיגוי של הקול הקורא לניסויים וארגזי חול ב-AI</div>
-<div class="editable" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #34495e; font-size: 0.8em; opacity: 0.7;">
+<div>דוח ניהול סיכונים זה הוכן עבור ועדת ההיגוי של הקול הקורא לניסויים וארגזי חול ב-AI</div>
+<div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #34495e; font-size: 0.8em; opacity: 0.7;">
 המסמך מבוסס על ניתוח מסמך הקול הקורא מיום 8.7.2025 ונועד לספק תמונת מצב של הסיכונים וההזדמנויות המרכזיים בניהול התוכנית.
 </div>
 </footer>
@@ -1653,117 +1511,27 @@ scroll-behavior: smooth;
 </div>
 
 <div class="back-to-top" id="backToTop">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const editToggle = document.getElementById('editToggle');
-    const pdfExport = document.getElementById('pdfExport');
-    const htmlExport = document.getElementById('htmlExport');
-    const successMessage = document.getElementById('successMessage');
     const backToTop = document.getElementById('backToTop');
-    
-    let isEditing = false;
-    
-    const setEditable = (isEditable) => {
-        const elements = document.querySelectorAll('.editable');
-        elements.forEach(el => {
-            el.setAttribute('contenteditable', isEditable);
-        });
-    };
-    
-    editToggle.addEventListener('click', () => {
-        isEditing = !isEditing;
-        setEditable(isEditing);
-        editToggle.textContent = isEditing ? '🔒 סיום עריכה' : '🎨 התחל עריכה';
-        editToggle.classList.toggle('active', isEditing);
-
-        successMessage.textContent = isEditing ? '✅ מצב עריכה הופעל!' : '🔒 מצב עריכה הופסק.';
-        successMessage.classList.add('show');
-        setTimeout(() => successMessage.classList.remove('show'), 3000);
-    });
-    
-    pdfExport.addEventListener('click', () => {
-        if (isEditing) {
-            alert('יש לסיים את מצב העריכה לפני ייצוא ל-PDF.');
-            return;
-        }
-
-        const element = document.querySelector('.container');
-        const originalTitle = document.title;
-        const projectNameElement = document.querySelector('.header .subtitle');
-        const projectName = projectNameElement ? projectNameElement.textContent.trim() : 'RiskReport';
-
-        document.title = projectName; // Set document title for PDF filename
-        pdfExport.textContent = '...מייצא';
-        pdfExport.classList.add('exporting');
-        
-        const opt = {
-            margin:       0,
-            filename:     `${projectName}.pdf`,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true, logging: false },
-            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-        };
-
-        html2pdf().from(element).set(opt).save().then(() => {
-            pdfExport.textContent = '📄 ייצוא ל-PDF';
-            pdfExport.classList.remove('exporting');
-            document.title = originalTitle;
-        });
-    });
-
-    htmlExport.addEventListener('click', () => {
-        if (isEditing) {
-            alert('יש לסיים את מצב העריכה לפני שמירה כ-HTML.');
-            return;
-        }
-
-        // Clone the entire document to avoid modifying the live one
-        const clonedDocument = document.documentElement.cloneNode(true);
-        
-        // Remove interactive elements from the clone
-        clonedDocument.querySelector('#editToggle')?.remove();
-        clonedDocument.querySelector('#pdfExport')?.remove();
-        clonedDocument.querySelector('#htmlExport')?.remove();
-        clonedDocument.querySelector('#backToTop')?.remove();
-        clonedDocument.querySelector('#successMessage')?.remove();
-        clonedDocument.querySelectorAll('script').forEach(script => script.remove());
-        
-        // Ensure all elements are no longer editable
-        clonedDocument.querySelectorAll('[contenteditable="true"]').forEach(el => {
-            el.setAttribute('contenteditable', 'false');
-        });
-
-        const htmlContent = clonedDocument.outerHTML;
-        const blob = new Blob([htmlContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        const projectNameElement = document.querySelector('.header .subtitle');
-        const projectName = projectNameElement ? projectNameElement.textContent.trim() : 'RiskReport';
-        
-        a.href = url;
-        a.download = `${projectName}.html`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    });
     
     // Back to top button visibility
     window.addEventListener('scroll', () => {
         if (window.pageYOffset > 300) {
-            backToTop.classList.add('visible');
+            if(backToTop) backToTop.classList.add('visible');
         } else {
-            backToTop.classList.remove('visible');
+            if(backToTop) backToTop.classList.remove('visible');
         }
     });
 
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if(backToTop) {
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
     // Active nav link on scroll
     const sections = document.querySelectorAll('section');
